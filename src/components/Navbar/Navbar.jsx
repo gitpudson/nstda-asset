@@ -18,42 +18,17 @@ const Navbar = () => {
 
     return (
         <>
-             <div className='title'>
+            {/* <div className='title'>
                 <Link to='/' onClick={()=>setMenu("")} className='logo'>ระบบตรวจสอบครุภัณฑ์ สวทช. ประจำปี {new Date().getFullYear()+543}</Link>
+            </div> */}
+
+            <div className='navbar-title'>
+                <div>ระบบตรวจสอบครุภัณฑ์ สวทช.</div>
+                <div>ประจำปี {new Date().getFullYear()+543}</div>
             </div>
         
             <div className='navbar'>
-                {/* <Link to='/'><img src={logo} alt="" className="logo" /></Link> */}
-            
-                {(isLoading) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>}
-                {(dataBuilding.length !== 0) &&
-                    <div className="navbar-menu">
-                        {
-                            dataBuilding.filter(d=>d.IsHide !== true).map((item,index) =>{
-                                var param = "/"+ item.BuildingName.toLowerCase().replace(" ","");
-                                var img = item.BuildingName === "CO" ? assets.co :
-                                            item.BuildingName === "NECTEC" ? assets.nectec :
-                                            item.BuildingName === "BIOTEC" ? assets.biotec :
-                                            item.BuildingName === "MTEC" ? assets.mtec :
-                                            item.BuildingName === "NANOTEC" ? assets.nanotec :
-                                            item.BuildingName === "ENTEC" ? assets.entec : assets.co
-                                return(
-                                    <div  key={index} onClick={()=>menuClick(item)}>
-                                    <Link to={param} className={menu===item.BuildingName?"active":""}>
-                                            <img src={img} alt="" className="logo" />
-                                    </Link> 
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-
-                }
-
-                <div className="navbar-right">
-                        
-                        
-                </div>
+                
 
             </div>
 

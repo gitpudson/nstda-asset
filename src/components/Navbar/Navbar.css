@@ -5,6 +5,16 @@
     align-items: center;
     /* align-content: center; */
 }
+.navbar-title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #49557e;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
 .navbar .logo{
     width: 70px;
     color: #49557e;
