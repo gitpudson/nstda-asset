@@ -50,6 +50,7 @@ const AppContextProvider = (props) => {
             }
         }
 
+        setIsLoading(true)
         const response = await axios.post(`${url_api_backend}`, post,
             {
                 headers: {
@@ -61,14 +62,15 @@ const AppContextProvider = (props) => {
 
         if (response.data.success) {
             // console.log(response.data.data.person_name);
-           return response.data.data;
+            setIsLoading(false);
+            return response.data.data;
         }
 
     }
 
 
     useEffect(() => {
-        fetAllBuilding();  
+        // fetAllBuilding();  
        
     },[])
 
