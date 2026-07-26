@@ -27,20 +27,27 @@ body {
 
 .row {
   display: flex;
+  align-items: center;
   gap: 8px;
+  width: 100%;
 }
 
 .input {
   flex: 1;
+  min-width: 0; /* สำคัญมาก */
   height: 50px;
   border-radius: 8px;
   border: 2px solid #f5a623;
   padding: 0 12px;
   font-size: 18px;
+  width: auto;
+  box-sizing: border-box;
 }
 
 .iconBtn {
-  width: 60px;
+  flex-shrink: 0; /* ไม่ให้ปุ่มถูกบีบ */
+  width: 50px;
+  height: 50px;
   border-radius: 10px;
   border: 2px solid #f5a623;
   background: #333;
