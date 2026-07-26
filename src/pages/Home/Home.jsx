@@ -50,6 +50,12 @@ const Home = () => {
           />
         </div>
 
+        {showScanner && (
+                <div className="scannerModal">
+                    <div id="reader"></div>
+                </div>
+        )}
+
       </div>
 
     </>
