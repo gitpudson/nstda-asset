@@ -1,0 +1,107 @@
+body {
+  /* background: #444; */
+  background: #fdfcfc;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 400px;
+  margin: auto;
+  padding: 16px;
+}
+
+.card {
+  background: #252525;
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.label {
+  color: #f5a623;
+  font-weight: bold;
+  font-size: 18px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+.input {
+  flex: 1;
+  height: 50px;
+  border-radius: 8px;
+  border: 2px solid #f5a623;
+  padding: 0 12px;
+  font-size: 18px;
+}
+
+.iconBtn {
+  width: 60px;
+  border-radius: 10px;
+  border: 2px solid #f5a623;
+  background: #333;
+  color: #f5a623;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.imageBox {
+  position: relative;
+  min-height: 180px;
+  background: #2d2d2d;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeholder {
+  color: #f5a623;
+  font-size: 24px;
+}
+
+.preview {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.cameraBtn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  border-radius: 10px;
+  border: 2px solid #f5a623;
+  background: #333;
+  color: #f5a623;
+  cursor: pointer;
+}
+
+.saveBtn {
+  display: block;
+  margin: 20px auto;
+  width: 140px;
+  height: 50px;
+  border: 3px solid #000;
+  border-radius: 12px;
+  background: #00b7ff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.scannerModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

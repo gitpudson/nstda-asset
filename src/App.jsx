@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home/Home';
 
 import axios from 'axios';
+import AssetForm from './components/AssetForm/AssetForm';
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
 
       <div className="app">
         <Navbar />
-
+        <AssetForm />
       </div>
 
     </>
