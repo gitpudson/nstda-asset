@@ -6,7 +6,7 @@ export const AppContext = createContext(null);
 
 const AppContextProvider = (props) => {
 
-    const url_api_backend = "https://script.google.com/macros/s/AKfycbzxZ12VosrdmWWFqgOxYrA2UwHMPLW5ffa_69E_tQNPs50dV-cH7la3QVgDAleRzCBebA/exec";
+    const url_api_backend = "https://script.google.com/macros/s/AKfycbyg6MlP1rcgNjTaWgob_GZyQS4WiJfE56-nSmhkuk2AgAwUwK8tUeFE1LKIFAfgH5ryzA/exec";
 
 
     const [dataBuilding,setDataBuilding] = useState([]);
@@ -40,6 +40,32 @@ const AppContextProvider = (props) => {
 
     }
 
+    const fetAssetByAssetCode = async (qrcode) => {
+        console.log(qrcode);
+        
+        const post = {
+            function: 'getAssetByAssetCode',
+            payload: {
+                "asset_code": qrcode
+            }
+        }
+
+        const response = await axios.post(`${url_api_backend}`, post,
+            {
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+                mode: "no-cors"
+            }
+        )
+
+        if (response.data.success) {
+            // console.log(response.data.data.person_name);
+           return response.data.data;
+        }
+
+    }
+
 
     useEffect(() => {
         fetAllBuilding();  
@@ -53,7 +79,8 @@ const AppContextProvider = (props) => {
         isLoading,
         dataBuilding,
         menu_building,
-        setMenuBuilding
+        setMenuBuilding,
+        fetAssetByAssetCode
     }
 
     return (

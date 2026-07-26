@@ -8,7 +8,6 @@ const Navbar = () => {
 
     const { isLoading,dataBuilding  } = useContext(AppContext);
     const [menu, setMenu] = useState("");
-    // const [logo, setLogo] = useState(assets.Co);
 
     const menuClick =  (item) => {
         setMenu(item.BuildingName)
@@ -18,18 +17,10 @@ const Navbar = () => {
 
     return (
         <>
-            {/* <div className='title'>
-                <Link to='/' onClick={()=>setMenu("")} className='logo'>ระบบตรวจสอบครุภัณฑ์ สวทช. ประจำปี {new Date().getFullYear()+543}</Link>
-            </div> */}
-
             <div className='navbar-title'>
                 <div>ระบบตรวจสอบครุภัณฑ์ สวทช.</div>
                 <div>ประจำปี {new Date().getFullYear()+543}</div>
             </div>
-        
-            {/* <div className='navbar'>
-                <img className='logo' src={assets.qrcode} alt="" />
-            </div> */}
 
         </>
     )
