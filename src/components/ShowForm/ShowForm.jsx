@@ -10,17 +10,20 @@ const ShowForm = ({ qrcode }) => {
 
   useEffect(() => {
     const loadData = async () => {
-        setIsLoading(true);
+        
 
         const asset = await fetAssetByAssetCode(qrcode);
 
         console.log(asset);
         setData(asset);
 
-        setIsLoading(false);
+        
     };
 
+    setIsLoading(true);
     loadData();
+    setIsLoading(false);
+    
 }, []);
 
   return (
