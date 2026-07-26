@@ -17,8 +17,8 @@ function App() {
     <>
 
       <div className="app">
-        <Navbar />
-        <AssetForm />
+        {/* <Navbar /> */}
+        <Home />
       </div>
 
     </>

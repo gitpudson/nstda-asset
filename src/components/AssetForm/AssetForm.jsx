@@ -34,18 +34,6 @@ export default function AssetForm() {
         }, 100);
     };
 
-    //   const captureImage = () => {
-    //     fileInputRef.current.click();
-    //   };
-
-    //   const handleImageChange = (e) => {
-    //     const file = e.target.files?.[0];
-    //     if (!file) return;
-
-    //     const imageUrl = URL.createObjectURL(file);
-    //     setImage(imageUrl);
-    //   };
-
     const captureImage = () => {
         fileInputRef.current?.click();
     };
