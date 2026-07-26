@@ -32,7 +32,16 @@ const ShowForm = ({ qrcode }) => {
        {data && (
         <>
           <div><img className='img-profile' src="https://i.nstda.or.th/lib/search/cache/large/+ {data.person_key} + .jpg" alt="image" width="100" height="100" /></div>
-          <div>{data.person_name}</div>        
+          <div>ผู้ถือครอง : {data.person_name}</div>        
+          <div>รหัสพนักงาน : {data.person_key}</div>        
+          <div>หน่วยงาน : {data.org_owner}</div>        
+          <div>รหัสครุภัณฑ์ : {data.asset_code}</div>        
+          <div>รายการครุภัณฑ์ : {data.asset_name}</div>        
+          <div>อาคาร : {data.new_building === "" ? data.build : data.new_building}</div>        
+          <div>ชั้น : {data.new_floor === "" ? data.floor : data.new_floor}</div>        
+          <div>ห้อง : {data.new_room === "" ? data.room : data.new_room}</div>        
+          <div>สถานะ : {data.new_status === "" ? data.asset_status : data.new_status}</div>        
+          <div>แก้ไขล่าสุด : {data.updated_at}</div>        
         </>
         
 
