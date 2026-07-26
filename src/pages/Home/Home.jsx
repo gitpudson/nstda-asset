@@ -42,7 +42,7 @@ const Home = () => {
       <div className='home'>
         <Navbar />
 
-        {(!showScanner || !showForm) && (
+        {(!showScanner && !showForm) && (
                 <>
                 <LogoQrCode />
                 <div className='btn-scan' onClick={openScanner}>
