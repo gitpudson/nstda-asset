@@ -122,7 +122,7 @@ export default function AssetForm() {
 
                 <div className="imageBox">
                     {image ? (
-                        <image alt="Preview" className="preview" />
+                        <img src={image} />
                     ) : (
                         <div className="placeholder">
                             No image captured
