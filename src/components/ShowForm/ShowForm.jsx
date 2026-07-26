@@ -28,6 +28,7 @@ const ShowForm = ({ qrcode }) => {
       <div>
        {/* {(isLoading) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>} */}
        {(isLoading) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>}
+      <div><img className='img-profile' src="https://i.nstda.or.th/lib/search/cache/large/+ {data.person_key} + .jpg" alt="image" width="100" height="100" /></div>
       <div>{data.person_name}</div>
       </div>
     </>
