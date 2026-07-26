@@ -28,7 +28,7 @@ const Navbar = () => {
             </div>
         
             <div className='navbar'>
-                
+                <img className='logo' src={assets.qrcode} alt="" />
 
             </div>
 
