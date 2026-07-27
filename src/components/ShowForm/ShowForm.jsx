@@ -36,7 +36,7 @@ const ShowForm = ({ qrcode }) => {
        {(!isLoading) && (
         <>
            {/* `<img id='img-profile' src="https://i.nstda.or.th/lib/search/cache/large/${dataArray[i][8].padStart(6,"0")}.jpg" alt="image" width="100" height="100"> */}
-          <div><img className='img-profile' src={img_url} alt="image" width="100" height="100" /></div>
+          <div><img className='img-profile' src="./spinner.svg" alt="image" width="100" height="100" /></div>
           <div>ผู้ถือครอง : {data.person_name}</div>        
           <div>รหัสพนักงาน : {data.person_key}</div>        
           <div>หน่วยงาน : {data.org_owner}</div>        
