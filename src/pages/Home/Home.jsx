@@ -75,7 +75,7 @@ const Home = () => {
         )}
 
         {showForm && ( <ShowForm  qrcode =  {barcode} />)}
-       {/* <ShowForm  qrcode =  "1202-001-0001-000001889" /> */}
+       {/* <ShowForm  qrcode =  "1201-001-0001-0000011-000" /> */}
 
       </div>
 
