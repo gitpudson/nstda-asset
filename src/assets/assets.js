@@ -6,6 +6,10 @@ import mtec from './Mtec.jpeg';
 import nanotec from './Nanotec.jpeg';
 import nectec from './Nectec.jpeg';
 import qrcode from './qrcode.png';
+import qrcode2 from './qrcode_2.png';
+import qrcode3 from './qrcode_3.png';
+import qrcode4 from './qrcode_4.png';
+import qrcode5 from './qrcode_5.png';
 
 
 
@@ -17,7 +21,11 @@ export const assets = {
     mtec,
     nanotec,
     nectec,
-    qrcode
+    qrcode,
+    qrcode2,
+    qrcode3,
+    qrcode4,
+    qrcode5,
 }
 
 export const menu_list = [

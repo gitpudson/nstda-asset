@@ -29,8 +29,8 @@ const ShowForm = ({ qrcode }) => {
   return (
     <>
       <div className="form-show">
-       {(isLoading) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>}
-       {/* {(isLoading) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>} */}
+       {/* {(isLoading) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>} */}
+       {(isLoading) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>}
 
        {(!isLoading) && (
         <>

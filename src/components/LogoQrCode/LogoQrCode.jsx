@@ -5,7 +5,7 @@ import './LogoQrCode.css'
 const LogoQrCode = () => {
     return (
         <div className='logo-qrcode'>
-            <img className='logo' src={assets.qrcode} alt="" />            
+            <img className='logo' src={assets.qrcode2} alt="" />            
         </div>
     )
 }
