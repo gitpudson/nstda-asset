@@ -3,7 +3,7 @@ import Navbar from '../../components/Navbar/Navbar'
 import LogoQrCode from '../../components/LogoQrCode/LogoQrCode'
 import { LuScanText } from "react-icons/lu";
 import './Home.css'
-import { Html5QrcodeScanner } from "html5-qrcode";
+import { Html5QrcodeScanner,Html5QrcodeSupportedFormats } from "html5-qrcode";
 import ShowForm from "../../components/ShowForm/ShowForm";
 
 const Home = () => {
