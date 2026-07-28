@@ -115,6 +115,8 @@ export default function AssetRequestMobile({ qrcode }) {
   return (    
     <>
     {(isLoading) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>}
+    {/* {(isLoading) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>} */}
+    
     {(!isLoading) && (
 
     <Box className="page">
@@ -146,8 +148,8 @@ export default function AssetRequestMobile({ qrcode }) {
         <Avatar
           src={imgPerson}
           sx={{
-            width: 60,
-            height: 60,
+            width: 75,
+            height: 75,
             bgcolor: "#ff6b00",
           }}
         />

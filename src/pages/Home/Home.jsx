@@ -77,10 +77,11 @@ const Home = () => {
         )}
 
         {/* {showForm && ( <ShowForm  qrcode =  {barcode} />)} */}
-        {showForm && ( <AssetRequestMobile  qrcode =  {barcode} />)}
+        
        {/* <ShowForm  qrcode =  "1201-001-0001-0000011-000" /> */}
        {/* <AssetRequestMobile qrcode =  "1201-001-0001-000000156"/> */}
 
+        {showForm && ( <AssetRequestMobile  qrcode =  {barcode} />)}
 
       </div>
 
