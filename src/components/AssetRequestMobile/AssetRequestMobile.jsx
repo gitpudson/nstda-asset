@@ -70,7 +70,17 @@ export default function AssetRequestMobile({ qrcode }) {
       preview: URL.createObjectURL(file),
     }));
 
-    setImages((prev) => [...prev, ...previewImages]);
+    // setImages((prev) => [...prev, ...previewImages]); <-- รองรับหลายรูป
+
+    //พอผู้ใช้ถ่ายรูปใหม่จะแทนที่รูปเก่า
+    setImages([
+    {
+        file,
+        preview: URL.createObjectURL(file),
+        isOld: false,
+    },
+    ]);
+
   };
 
   //แปลงรูปเป็น Base64 ก่อน
@@ -213,11 +223,13 @@ useEffect(() => {
           setFormData(asset);
           setImgPerson(`https://i.nstda.or.th/lib/search/cache/large/${asset.person_key}.jpg`);
 
-        const apiImages = asset.image_url.map((url) => ({
-        preview: url,
-        isOld: true,
-        }));
-        setImages(apiImages);
+        setImages([
+        {
+            preview: asset.image_url,
+            isOld: true,
+        },
+        ]);
+
     };
           
           
