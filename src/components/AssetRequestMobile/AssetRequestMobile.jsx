@@ -550,6 +550,15 @@ useEffect(() => {
             ))}
         </Box>
 
+        {
+            formData.updated_at !== "" ?(
+                  <Typography className="label">
+                    Update ล่าสุด {formData.updated_at}
+                  </Typography>
+            ) : ""
+        }
+      
+
       </Card>
 
       {(isSaving) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>}
