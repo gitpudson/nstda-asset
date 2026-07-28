@@ -19,6 +19,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import "./AssetRequestMobile.css";
 import { assets } from "../../assets/assets";
 import { AppContext } from '../../context/AppContext';
+import axios from 'axios';
 
 export default function AssetRequestMobile({ qrcode }) {
 
@@ -70,13 +71,87 @@ export default function AssetRequestMobile({ qrcode }) {
     setImages((prev) => [...prev, ...previewImages]);
   };
 
-  const handleSave = async () => {
-    console.log(formData);
+  //แปลงรูปเป็น Base64 ก่อน
+  const fileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
 
-    // await axios.post(...)
+        reader.onload = () => {
+        const base64 = reader.result.split(",")[1];
+
+        resolve(
+            `${file.name}||${file.type}||${base64}`
+        );
+        };
+
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+};
+
+//   const handleSave = async () => {
+
+//     const payload = new FormData();
+
+//     payload.append("function", "updateAsset");
+//     payload.append("function", "updateAsset");
+
+//     // ข้อมูลทั่วไป
+//     Object.keys(formData).forEach((key) => {
+//         payload.append(key, formData[key]);
+//     });
+
+//     // รูปภาพ
+//     images.forEach((img) => {
+//         payload.append("images", img.file);
+//     });
+
+//     //   await axios.post("/api/assets", payload, {
+//     //     headers: {
+//     //       "Content-Type": "multipart/form-data",
+//     //     },
+//     //   });
+
+//     console.log(payload);
+
+//     for (let pair of payload.entries()) {
+//     console.log(pair[0], pair[1]);
+//     }
+
+// };
+
+const handleSave = async () => {
+  const imageData = await Promise.all(
+    images.map((img) => fileToBase64(img.file))
+  );
+
+  const data = {
+    function: "updateAsset",
+    payload: {
+      ...formData,
+      image: imageData,
+    },
   };
 
-    useEffect(() => {
+        console.log(data);
+
+        // await axios.post(API_URL, data);
+        const response = await axios.post(`${url_api_backend}`, data,
+            {
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+                mode: "no-cors"
+            }
+        )
+
+        if (response.data.success) {
+            console.log(response.data.message);
+            // return response.data.data;
+        }
+};
+
+useEffect(() => {
       const loadData = async () => {         
   
           const asset = await fetAssetByAssetCode(qrcode);
@@ -103,7 +178,7 @@ export default function AssetRequestMobile({ qrcode }) {
   
           const status = await fetStatus();  
           setStatusList(status);
-          console.log("statusList =", statusList);      
+        //   console.log("statusList =", statusList);      
           
       };
   
@@ -314,8 +389,8 @@ export default function AssetRequestMobile({ qrcode }) {
             select
             fullWidth
             size="small"
-            name="asset_status"
-            value={formData.asset_status || ""}
+            name="new_status"
+            value={formData.new_status || ""}
             onChange={handleChange}
             >
             {statusList.map((status) => (
