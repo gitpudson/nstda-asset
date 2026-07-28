@@ -70,7 +70,7 @@ export default function AssetRequestMobile({ qrcode }) {
       preview: URL.createObjectURL(file),
     }));
 
-    setImages((prev) => [...prev, ...previewImages]); <-- รองรับหลายรูป
+    setImages((prev) => [...prev, ...previewImages]);
 
   };
 
