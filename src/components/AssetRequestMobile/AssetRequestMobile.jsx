@@ -128,7 +128,7 @@ export default function AssetRequestMobile({ qrcode }) {
     </IconButton>
 
     <Typography variant="h6" fontWeight={700}>
-        รายการครุภัณฑ์ผู้ถือครอง
+        รายการผู้ถือครองครุภัณฑ์
     </Typography>
     
  
