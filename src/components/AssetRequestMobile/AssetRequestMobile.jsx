@@ -88,6 +88,12 @@ export default function AssetRequestMobile({ qrcode }) {
   ]);
 };
 
+const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleString("th-TH", {
+    timeZone: "Asia/Bangkok",
+    });
+};
+
   //แปลงรูปเป็น Base64 ก่อน
   const fileToBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -553,7 +559,7 @@ useEffect(() => {
         {
             formData.updated_at !== "" ?(
                   <Typography className="label">
-                    Update ล่าสุด {formData.updated_at}
+                    Update ล่าสุด {formatDate(formData.updated_at)}
                   </Typography>
             ) : ""
         }
