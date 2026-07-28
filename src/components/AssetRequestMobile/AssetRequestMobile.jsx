@@ -182,9 +182,9 @@ export default function AssetRequestMobile({ qrcode }) {
           value={formData.asset_code}
         />
 
-        <Typography className="label">
+        {/* <Typography className="label">
           สถานะ
-        </Typography>
+        </Typography> */}
 
         {/* <TextField
           select
@@ -203,7 +203,7 @@ export default function AssetRequestMobile({ qrcode }) {
           </MenuItem>
         </TextField> */}
 
-        <TextField
+        {/* <TextField
             select
             fullWidth
             size="small"
@@ -219,7 +219,7 @@ export default function AssetRequestMobile({ qrcode }) {
                 {status}
                 </MenuItem>
             ))}
-        </TextField>
+        </TextField> */}
 
         <Typography className="label">
           รายการครุภัณฑ์
@@ -304,6 +304,28 @@ export default function AssetRequestMobile({ qrcode }) {
           <MenuItem value="PHT และ OEC">
             PHT และ OEC
           </MenuItem>
+        </TextField>
+
+        <Typography className="label">
+          สถานะ
+        </Typography>
+
+        <TextField
+            select
+            fullWidth
+            size="small"
+            name="asset_status"
+            value={formData.asset_status || ""}
+            onChange={handleChange}
+            >
+            {statusList.map((status) => (
+                <MenuItem
+                key={status}
+                value={status}
+                >
+                {status}
+                </MenuItem>
+            ))}
         </TextField>
 
         <Typography className="label">
