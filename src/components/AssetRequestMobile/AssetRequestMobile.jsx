@@ -153,6 +153,14 @@ const handleSave1 = async () => {
 };
 
 const handleSave = async () => {
+
+    // ตรวจสอบว่ามีรูปหรือไม่
+    if (images.length === 0) {
+    // alert("กรุณาถ่ายรูปหรือแนบรูปภาพอย่างน้อย 1 รูป");
+    alert("กรุณาถ่ายรูปหรือแนบรูปภาพก่อน");
+    return;
+    }
+
     try {
         // setSaving(true);
 
