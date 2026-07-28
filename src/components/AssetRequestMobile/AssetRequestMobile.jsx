@@ -228,12 +228,23 @@ useEffect(() => {
           setFormData(asset);
           setImgPerson(`https://i.nstda.or.th/lib/search/cache/large/${asset.person_key}.jpg`);
 
-        setImages([
-        {
-            preview: asset.image_url,
-            isOld: true,
-        },
-        ]);
+        // setImages([
+        // {
+        //     preview: asset.image_url,
+        //     isOld: true,
+        // },
+        // ]);
+
+        const apiImages = asset.image_url
+                            ? [
+                                {
+                                    preview: asset.image_url,
+                                    isOld: true,
+                                },
+                                ]
+                            : [];
+
+        setImages(apiImages);
 
     };
           
@@ -526,11 +537,14 @@ useEffect(() => {
         </Box> */}
 
         <Box className="gallery">
-            {images.map((item, index) => (
+            {images
+            .filter((item) => item.preview)
+            .map((item, index) => (
                 <img
                 key={index}
                 src={item.preview}
-                alt={`preview-${index}`}
+                // alt={`preview-${index}`}
+                alt=""
                 className="preview"
                 />
             ))}
