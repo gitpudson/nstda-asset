@@ -559,7 +559,7 @@ useEffect(() => {
         {
             formData.updated_at !== "" ?(
                   <Typography className="label">
-                    Update ล่าสุด {formatDate(formData.updated_at)}
+                    Updated {formatDate(formData.updated_at)}
                   </Typography>
             ) : ""
         }
