@@ -239,10 +239,15 @@ const handleSave = async () => {
 
     try {
 
+        let imageData = [];
+
         const newImages = images.filter((img) => img.file);
-        const imageData = await Promise.all(
+
+        if (newImages.length > 0) {
+        imageData = await Promise.all(
             newImages.map((img) => fileToBase64(img.file))
         );
+        }
 
         const data = {
             function: "updateAsset",
