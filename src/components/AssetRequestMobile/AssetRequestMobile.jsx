@@ -23,7 +23,7 @@ import axios from 'axios';
 
 export default function AssetRequestMobile({ qrcode }) {
 
-  const { url_api_backend, fetAssetByAssetCode ,fetStatus,isLoading,SaveData} = useContext(AppContext);
+  const { url_api_backend, fetAssetByAssetCode ,fetStatus,isLoading,SaveData,isSaving} = useContext(AppContext);
 
   const [images, setImages] = useState([]);
   const [imgPerson,setImgPerson] = useState();
@@ -154,20 +154,22 @@ const handleSave1 = async () => {
 
 const handleSave = async () => {
     try {
-            const imageData = await Promise.all(
-                images.map((img) => fileToBase64(img.file))
-            );
+        setSaving(true);
 
-            const data = {
-                function: "updateAsset",
-                payload: {
-                ...formData,
-                image: imageData,
-                },
-            };
+        const imageData = await Promise.all(
+            images.map((img) => fileToBase64(img.file))
+        );
 
-            SaveData(data);
-            alert("บันทึกสำเร็จ");
+        const data = {
+            function: "updateAsset",
+            payload: {
+            ...formData,
+            image: imageData,
+            },
+        };
+
+        SaveData(data);
+        // alert("บันทึกสำเร็จ");
 
     } catch (error) {
         console.error(error);

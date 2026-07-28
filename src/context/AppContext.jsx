@@ -12,7 +12,7 @@ const AppContextProvider = (props) => {
     const [dataBuilding,setDataBuilding] = useState([]);
     const [menu_building, setMenuBuilding] = useState("");
     const [isLoading,setIsLoading] = useState(true);
-    // const [isSaving,setIsSaving] = useState(false);
+    const [isSaving,setIsSaving] = useState(false);
 
 
     const fetAllBuilding = async () => {
@@ -98,7 +98,7 @@ const AppContextProvider = (props) => {
     const SaveData = async (post) => {
         
 
-        // setIsSaving(true);
+        setIsSaving(true);
         const response = await axios.post(`${url_api_backend}`, post,
             {
                 headers: {
@@ -109,7 +109,7 @@ const AppContextProvider = (props) => {
         )
 
         if (response) {
-            // setIsSaving(false);
+            setIsSaving(false);
             console.log("Success");
         }
 
@@ -132,7 +132,7 @@ const AppContextProvider = (props) => {
         fetAssetByAssetCode,
         fetStatus,
         SaveData,
-        // isSaving
+        isSaving
     }
 
     return (
