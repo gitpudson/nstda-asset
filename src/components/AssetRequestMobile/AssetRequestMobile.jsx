@@ -116,7 +116,7 @@ export default function AssetRequestMobile({ qrcode }) {
     <>
     {(isLoading) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>}
     {/* {(isLoading) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>} */}
-    
+
     {(!isLoading) && (
 
     <Box className="page">
@@ -227,12 +227,12 @@ export default function AssetRequestMobile({ qrcode }) {
 
         <Box className="asset-box">
           <Typography fontWeight={700}>
-            งานปรับปรุงห้อง Changing Room และ Ante Room
+            {formData.asset_name}
           </Typography>
 
-          <Typography variant="body2">
+          {/* <Typography variant="body2">
             ของห้องปฏิบัติการใช้สัตว์เพื่องานทางวิทยาศาสตร์
-          </Typography>
+          </Typography> */}
         </Box>
 
         <Typography className="label">
