@@ -174,7 +174,7 @@ const handleSave1 = async () => {
         }
 };
 
-const handleSave = async () => {
+const handleSave2 = async () => {
 
     // ตรวจสอบว่ามีรูปหรือไม่
     // if (images.length === 0) {
@@ -198,6 +198,50 @@ const handleSave = async () => {
 
         const imageData = await Promise.all(
             images.map((img) => fileToBase64(img.file))
+        );
+
+        const data = {
+            function: "updateAsset",
+            payload: {
+            ...formData,
+            image: imageData,
+            },
+        };
+
+        SaveData(data);
+        // alert("บันทึกสำเร็จ");
+
+    } catch (error) {
+        console.error(error);
+        Swal.fire({
+            icon: "error",
+            title: "เกิดข้อผิดพลาด",
+            text: "ไม่สามารถบันทึกข้อมูลได้",
+            });
+    } finally {
+        // setSaving(false);
+    }
+        
+};
+
+const handleSave = async () => {
+
+    if (!images || images.length === 0) {
+        Swal.fire({
+            icon: "warning",
+            title: "ไม่พบรูปภาพ",
+            // text: "กรุณาถ่ายรูปหรือแนบรูปภาพอย่างน้อย 1 รูป",
+            text: "กรุณาถ่ายรูปหรือแนบรูปภาพก่อน",
+            confirmButtonText: "ตกลง",
+        });
+        return;
+    }
+
+    try {
+
+        const newImages = images.filter((img) => img.file);
+        const imageData = await Promise.all(
+            newImages.map((img) => fileToBase64(img.file))
         );
 
         const data = {
