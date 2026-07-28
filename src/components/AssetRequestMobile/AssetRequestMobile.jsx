@@ -127,12 +127,12 @@ export default function AssetRequestMobile({ qrcode }) {
         {/* <ArrowBackIcon /> */}
     </IconButton>
 
-    <Typography variant="h6" fontWeight={700}>
+    <Typography variant="h6" fontWeight={300}>
         รายการผู้ถือครองครุภัณฑ์
     </Typography>
     
  
-    <img className="logo" src={formData.org_owner === "สก." ? assets.co :
+    <img className="logo-org" src={formData.org_owner === "สก." ? assets.co :
                                formData.org_owner === "ศอ." ? assets.nectec :
                                formData.org_owner === "ศช." ? assets.biotec :
                                formData.org_owner === "ศว." ? assets.mtec :
