@@ -94,6 +94,26 @@ const AppContextProvider = (props) => {
 
     }
 
+    const SaveData = async (post) => {
+        
+
+        setIsLoading(true)
+        const response = await axios.post(`${url_api_backend}`, post,
+            {
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+                mode: "no-cors"
+            }
+        )
+
+        if (response) {
+            setIsLoading(false);
+            console.log("Success");
+        }
+
+    }
+
 
     useEffect(() => {
         // fetAllBuilding();  
@@ -109,7 +129,8 @@ const AppContextProvider = (props) => {
         menu_building,
         setMenuBuilding,
         fetAssetByAssetCode,
-        fetStatus
+        fetStatus,
+        SaveData
     }
 
     return (

@@ -23,7 +23,7 @@ import axios from 'axios';
 
 export default function AssetRequestMobile({ qrcode }) {
 
-  const { url_api_backend, fetAssetByAssetCode ,fetStatus,isLoading} = useContext(AppContext);
+  const { url_api_backend, fetAssetByAssetCode ,fetStatus,isLoading,SaveData} = useContext(AppContext);
 
   const [images, setImages] = useState([]);
   const [imgPerson,setImgPerson] = useState();
@@ -120,7 +120,7 @@ export default function AssetRequestMobile({ qrcode }) {
 
 // };
 
-const handleSave = async () => {
+const handleSave1 = async () => {
   const imageData = await Promise.all(
     images.map((img) => fileToBase64(img.file))
   );
@@ -145,10 +145,27 @@ const handleSave = async () => {
             }
         )
 
-        if (response.data.success) {
-            console.log(response.data.message);
-            // return response.data.data;
+
+        if (response) {
+            console.log("Success");
         }
+};
+
+const handleSave = async () => {
+  const imageData = await Promise.all(
+    images.map((img) => fileToBase64(img.file))
+  );
+
+  const data = {
+    function: "updateAsset",
+    payload: {
+      ...formData,
+      image: imageData,
+    },
+  };
+
+  SaveData(data);
+        
 };
 
 useEffect(() => {
