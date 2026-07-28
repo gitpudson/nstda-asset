@@ -29,7 +29,7 @@ export default function AssetRequestMobile({ qrcode }) {
   const [imgPerson,setImgPerson] = useState();
   const [data,setData] = useState({});
   const [statusList,setStatusList] = useState([]);
-  const [saving, setSaving] = useState(false);
+//   const [saving, setSaving] = useState(false);
 
   const [formData, setFormData] = useState({
     org_owner: "",
@@ -154,7 +154,7 @@ const handleSave1 = async () => {
 
 const handleSave = async () => {
     try {
-        setSaving(true);
+        // setSaving(true);
 
         const imageData = await Promise.all(
             images.map((img) => fileToBase64(img.file))
@@ -175,7 +175,7 @@ const handleSave = async () => {
         console.error(error);
         alert("บันทึกไม่สำเร็จ");
     } finally {
-        setSaving(false);
+        // setSaving(false);
     }
         
 };
@@ -218,7 +218,7 @@ useEffect(() => {
 
   return (    
     <>
-    {(isLoading || saving) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>}
+    {(isLoading || isSaving) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>}
     {/* {(isLoading  || saving) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>} */}
 
     {(!isLoading) && (
@@ -486,9 +486,9 @@ useEffect(() => {
           variant="contained"
           onClick={handleSave}
           className="save-btn"
-          disabled={saving}
+          disabled={isSaving}
         >
-          {saving ? "Saving..." : "Save"}
+          {isSaving ? "Saving..." : "Save"}
         </Button>
       </Box>
 
