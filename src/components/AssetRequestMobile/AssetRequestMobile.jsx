@@ -20,6 +20,7 @@ import "./AssetRequestMobile.css";
 import { assets } from "../../assets/assets";
 import { AppContext } from '../../context/AppContext';
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 export default function AssetRequestMobile({ qrcode }) {
 
@@ -155,10 +156,20 @@ const handleSave1 = async () => {
 const handleSave = async () => {
 
     // ตรวจสอบว่ามีรูปหรือไม่
-    if (images.length === 0) {
-    // alert("กรุณาถ่ายรูปหรือแนบรูปภาพอย่างน้อย 1 รูป");
-    alert("กรุณาถ่ายรูปหรือแนบรูปภาพก่อน");
-    return;
+    // if (images.length === 0) {
+    // // alert("กรุณาถ่ายรูปหรือแนบรูปภาพอย่างน้อย 1 รูป");
+    // alert("กรุณาถ่ายรูปหรือแนบรูปภาพก่อน");
+    // return;
+    // }
+    if (!images || images.length === 0) {
+        Swal.fire({
+            icon: "warning",
+            title: "ไม่พบรูปภาพ",
+            // text: "กรุณาถ่ายรูปหรือแนบรูปภาพอย่างน้อย 1 รูป",
+            text: "กรุณาถ่ายรูปหรือแนบรูปภาพก่อน",
+            confirmButtonText: "ตกลง",
+        });
+        return;
     }
 
     try {
@@ -181,7 +192,11 @@ const handleSave = async () => {
 
     } catch (error) {
         console.error(error);
-        alert("บันทึกไม่สำเร็จ");
+        Swal.fire({
+            icon: "error",
+            title: "เกิดข้อผิดพลาด",
+            text: "ไม่สามารถบันทึกข้อมูลได้",
+            });
     } finally {
         // setSaving(false);
     }

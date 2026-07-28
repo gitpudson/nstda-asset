@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import axios from 'axios';
-
+import Swal from "sweetalert2";
 
 export const AppContext = createContext(null);
 
@@ -111,6 +111,13 @@ const AppContextProvider = (props) => {
         if (response) {
             setIsSaving(false);
             console.log("Success");
+            Swal.fire({
+                icon: "success",
+                title: "บันทึกสำเร็จ",
+                text: "ข้อมูลถูกบันทึกเรียบร้อยแล้ว",
+                timer: 2000,
+                showConfirmButton: false,
+                });
         }
 
     }
