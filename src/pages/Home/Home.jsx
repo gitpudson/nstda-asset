@@ -5,6 +5,8 @@ import { LuScanText } from "react-icons/lu";
 import './Home.css'
 import { Html5QrcodeScanner,Html5QrcodeSupportedFormats } from "html5-qrcode";
 import ShowForm from "../../components/ShowForm/ShowForm";
+import AssetRequestMobile from "../../components/AssetRequestMobile/AssetRequestMobile";
+import AssetRequestMobile2 from "../../components/AssetRequestMobile2/AssetRequestMobile2";
 
 const Home = () => {
   const [barcode, setBarcode] = useState("");
@@ -74,8 +76,11 @@ const Home = () => {
                 </div>
         )}
 
-        {showForm && ( <ShowForm  qrcode =  {barcode} />)}
+        {/* {showForm && ( <ShowForm  qrcode =  {barcode} />)} */}
+        {showForm && ( <AssetRequestMobile  qrcode =  {barcode} />)}
        {/* <ShowForm  qrcode =  "1201-001-0001-0000011-000" /> */}
+       {/* <AssetRequestMobile qrcode =  "1201-001-0001-000000156"/> */}
+
 
       </div>
 

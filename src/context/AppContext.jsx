@@ -68,6 +68,32 @@ const AppContextProvider = (props) => {
 
     }
 
+    const fetStatus = async () => {
+      
+
+        const post = {
+            function: 'getStatus',
+            payload: {
+
+            }
+        }
+
+        const response = await axios.post(`${url_api_backend}`, post,
+            {
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+                mode: "no-cors"
+            }
+        )
+
+        if (response.data.success) {
+            // console.log(response.data.data.person_name);
+            return response.data.data;
+        }
+
+    }
+
 
     useEffect(() => {
         // fetAllBuilding();  
@@ -82,7 +108,8 @@ const AppContextProvider = (props) => {
         dataBuilding,
         menu_building,
         setMenuBuilding,
-        fetAssetByAssetCode
+        fetAssetByAssetCode,
+        fetStatus
     }
 
     return (
