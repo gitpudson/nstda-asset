@@ -49,10 +49,11 @@ const Home = () => {
   return (
     <>
       <div className='home'>
-        <Navbar />
+        {/* <Navbar /> */}
 
         {(!showScanner && !showForm) && (
                 <>
+                <Navbar />
                 <LogoQrCode />
                 <div className='btn-scan' onClick={openScanner}>
                   <LuScanText className='icon-qrcode' />
