@@ -213,11 +213,15 @@ useEffect(() => {
           setFormData(asset);
           setImgPerson(`https://i.nstda.or.th/lib/search/cache/large/${asset.person_key}.jpg`);
 
-        //   console.log(imgPerson);
-        //   console.log(asset.asset_status);
+        const apiImages = asset.image_url.map((url) => ({
+        preview: url,
+        isOld: true,
+        }));
+        setImages(apiImages);
+    };
           
           
-      };
+      
   
       // setIsLoading(true);
       loadData();
@@ -487,6 +491,22 @@ useEffect(() => {
             onChange={handleImage}
           />
         </label>
+
+        {/* <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+            {images.map((img, index) => (
+                <img
+                key={index}
+                src={img.preview}
+                alt={`preview-${index}`}
+                width={120}
+                height={120}
+                style={{
+                    objectFit: "cover",
+                    borderRadius: "8px",
+                }}
+                />
+            ))}
+        </Box> */}
 
         <Box className="gallery">
             {images.map((item, index) => (
