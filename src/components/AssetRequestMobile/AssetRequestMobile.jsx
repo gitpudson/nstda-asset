@@ -284,7 +284,7 @@ export default function AssetRequestMobile({ qrcode }) {
             ),
           }}
         >
-          <MenuItem value="xx">
+          <MenuItem value={formData.floor}>
             ชั้น 4
           </MenuItem>
         </TextField>
@@ -322,12 +322,12 @@ export default function AssetRequestMobile({ qrcode }) {
             แตะเพื่อถ่ายรูป
           </Typography>
 
-          {/* <Typography
+          <Typography
             variant="caption"
             color="text.secondary"
           >
-            หรือเลือกจากแกลเลอรี่
-          </Typography> */}
+            {/* หรือเลือกจากแกลเลอรี่ */}
+          </Typography>
 
           <input
             type="file"
