@@ -62,7 +62,7 @@ export default function AssetRequestMobile({ qrcode }) {
     });
   };
 
-  const handleImage = (e) => {
+  const handleImage1 = (e) => {
     const files = Array.from(e.target.files);
 
     const previewImages = files.map((file) => ({
@@ -70,18 +70,23 @@ export default function AssetRequestMobile({ qrcode }) {
       preview: URL.createObjectURL(file),
     }));
 
-    // setImages((prev) => [...prev, ...previewImages]); <-- รองรับหลายรูป
-
-    //พอผู้ใช้ถ่ายรูปใหม่จะแทนที่รูปเก่า
-    setImages([
-    {
-        file,
-        preview: URL.createObjectURL(file),
-        isOld: false,
-    },
-    ]);
+    setImages((prev) => [...prev, ...previewImages]); <-- รองรับหลายรูป
 
   };
+
+  const handleImage = (e) => {
+  const file = e.target.files?.[0];
+
+  if (!file) return;
+
+  setImages([
+    {
+      file,
+      preview: URL.createObjectURL(file),
+      isOld: false,
+    },
+  ]);
+};
 
   //แปลงรูปเป็น Base64 ก่อน
   const fileToBase64 = (file) => {
