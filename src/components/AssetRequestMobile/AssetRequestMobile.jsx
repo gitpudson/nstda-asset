@@ -286,6 +286,18 @@ const handleSave = async () => {
         return;
     }
 
+    const result = await Swal.fire({
+        title: "ยืนยันการบันทึก?",
+        text: "ต้องการบันทึกข้อมูลนี้หรือไม่",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "บันทึก",
+        cancelButtonText: "ยกเลิก",
+        reverseButtons: true,
+    });
+    
+    if (!result.isConfirmed) return;
+
     try {
 
         let imageData = [];
