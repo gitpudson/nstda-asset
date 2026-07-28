@@ -114,9 +114,10 @@ export default function AssetRequestMobile({ qrcode }) {
 
   return (    
     <>
-    {formData && (
+    {(isLoading) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>}
+    {(!isLoading) && (
 
-        <Box className="page">
+    <Box className="page">
 
     {/* Header */}
     <Box className="header">
