@@ -29,6 +29,7 @@ export default function AssetRequestMobile({ qrcode }) {
   const [imgPerson,setImgPerson] = useState();
   const [data,setData] = useState({});
   const [statusList,setStatusList] = useState([]);
+  const [saving, setSaving] = useState(false);
 
   const [formData, setFormData] = useState({
     org_owner: "",
@@ -152,19 +153,28 @@ const handleSave1 = async () => {
 };
 
 const handleSave = async () => {
-  const imageData = await Promise.all(
-    images.map((img) => fileToBase64(img.file))
-  );
+    try {
+            const imageData = await Promise.all(
+                images.map((img) => fileToBase64(img.file))
+            );
 
-  const data = {
-    function: "updateAsset",
-    payload: {
-      ...formData,
-      image: imageData,
-    },
-  };
+            const data = {
+                function: "updateAsset",
+                payload: {
+                ...formData,
+                image: imageData,
+                },
+            };
 
-  SaveData(data);
+            SaveData(data);
+            alert("บันทึกสำเร็จ");
+
+    } catch (error) {
+        console.error(error);
+        alert("บันทึกไม่สำเร็จ");
+    } finally {
+        setSaving(false);
+    }
         
 };
 
@@ -206,8 +216,8 @@ useEffect(() => {
 
   return (    
     <>
-    {(isLoading) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>}
-    {/* {(isLoading) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>} */}
+    {(isLoading || saving) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>}
+    {/* {(isLoading  || saving) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>} */}
 
     {(!isLoading) && (
 
@@ -474,8 +484,9 @@ useEffect(() => {
           variant="contained"
           onClick={handleSave}
           className="save-btn"
+          disabled={saving}
         >
-          Save
+          {saving ? "Saving..." : "Save"}
         </Button>
       </Box>
 
