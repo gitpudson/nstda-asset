@@ -4,14 +4,20 @@
   padding-bottom: 90px;
 }
 
-.header {
+.header-box {
   height: 64px;
-  background: white;
+  /* background: white; */
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  background: linear-gradient(
+    135deg,
+    #1aa7ec,
+    #2563eb,
+    #5a35e5
+  );
 }
 
 .logo-org {
