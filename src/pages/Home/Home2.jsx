@@ -135,9 +135,9 @@ export default function Home2() {
           <QrCodeScannerIcon sx={{ fontSize: 42 }} />
         </Fab>
 
-        <Typography className="scan-label">
+        {/* <Typography className="scan-label">
           สแกน
-        </Typography>
+        </Typography> */}
       </div>
 
       {showScanner && (

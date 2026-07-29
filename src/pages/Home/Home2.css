@@ -40,7 +40,7 @@ body {
 }
 
 .hero-title {
-  font-size: 32px !important;
+  font-size: 20px !important;
   font-weight: 700 !important;
   color: #fff;
 }
@@ -167,12 +167,12 @@ body {
 .scan-section {
   text-align: center;
   padding-bottom: 40px;
-  margin-top: 80px;
+  margin-top: 30px;
 }
 
 .scan-btn {
-  width: 100px !important;
-  height: 100px !important;
+  width: 80px !important;
+  height: 80px !important;
 
   background: linear-gradient(
     135deg,
