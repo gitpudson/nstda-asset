@@ -10,7 +10,7 @@ import AssetForm from './components/AssetForm/AssetForm';
 
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import { getTheme } from "./theme/theme";
-import AssetScanner from './pages/QrScannerPage/QrScannerPage';
+import AssetScanner from './pages/AssetScanner/AssetScanner';
 
 function App() {
 
@@ -31,6 +31,7 @@ function App() {
             <AssetScanner />
           </div> */}
           <AssetScanner />
+         
           
         </div>
       </ThemeProvider>
