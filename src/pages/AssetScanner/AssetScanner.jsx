@@ -289,9 +289,18 @@ export default function AssetScanner() {
                                     </p>
                                 )}
 
-                                <div className="badge">
-                                    SMR@NECTEC
-                                </div>
+                                {
+                                    !isScanning
+                                            ? (
+                                                <div className="badge">
+                                                SMR@NECTEC
+                                                </div>
+                                            )
+                                            : (
+                                                <></>
+                                            )
+                                }
+                                
 
                             </div>                         
                                          
