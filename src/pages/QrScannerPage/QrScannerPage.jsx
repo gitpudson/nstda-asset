@@ -106,9 +106,9 @@ export default function AssetScanner() {
 
       <main className="content">
         <div className="qr-card">
-          <h2>สแกนคิวอาร์โค้ด</h2>
+          {/* <h2>สแกนคิวอาร์โค้ด</h2> */}
 
-          <div className="title-line"></div>
+          {/* <div className="title-line"></div> */}
 
           {!isScanning ? (
             <div className="scanner-frame">
@@ -183,22 +183,31 @@ export default function AssetScanner() {
             <div className="scan-section">
                 <Fab
                                 className="scan-btn"
-                                // onClick={handleScan}
+                                onClick={startScanner}
                             >
                                 <QrCodeScannerIcon sx={{ fontSize: 42 }} />
                             </Fab>
             </div>
 
-            {/* <span>สแกน</span> */}
+            <span>สแกน</span>
           </>
         ) : (
           <>
-            <button
+            {/* <button
               className="scan-button stop"
               onClick={stopScanner}
             >
               ✕
-            </button>
+            </button> */}
+
+             <div className="scan-section">
+                <Fab
+                                className="scan-btn"
+                                onClick={stopScanner}
+                            >
+                                <QrCodeScannerIcon sx={{ fontSize: 42 }} />
+                            </Fab>
+            </div>
 
             <span>ปิดกล้อง</span>
           </>
