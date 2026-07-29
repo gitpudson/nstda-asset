@@ -309,11 +309,11 @@ useEffect(() => {
           </button>
         )}
 
-        <span>
+        {/* <span>
           {isScanning
             ? "ปิดกล้อง"
             : "สแกน"}
-        </span>
+        </span> */}
       </div>
     </div>
   );
