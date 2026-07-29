@@ -20,6 +20,7 @@ export default function AssetScanner() {
 
   const [isScanning, setIsScanning] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [scanResult, setScanResult] = useState("");
 
   const sendToApi = async (qrValue) => {
     try {
@@ -269,9 +270,14 @@ useEffect(() => {
             </div>
           )}
 
-          <p className="description">
+          {/* <p className="description">
             เพื่อตรวจสอบข้อมูลครุภัณฑ์
-          </p>
+          </p> */}
+          {scanResult && (
+            <p className="description">
+                {scanResult}
+            </p>
+          )}
 
           <div className="badge">
             SMR@NECTEC
