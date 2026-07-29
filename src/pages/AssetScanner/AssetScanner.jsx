@@ -91,17 +91,56 @@ export default function AssetScanner() {
         scannerRef.current = null;
       }
 
-      setIsScanning(false);
+     
+    } catch (error) {
+      console.error(error);
+    }
+
+     setIsScanning(false);
+  };
+
+//   useEffect(() => {
+//     return () => {
+//       stopScanner();
+//     };
+//   }, []);
+
+  useEffect(() => {
+  const initScanner = async () => {
+    if (!isScanning || scannerRef.current) return;
+
+    try {
+      const scanner = new Html5Qrcode("reader");
+
+      scannerRef.current = scanner;
+
+      await scanner.start(
+        {
+          facingMode: "environment",
+        },
+        {
+          fps: 10,
+          qrbox: {
+            width: 250,
+            height: 250,
+          },
+        },
+        async (decodedText) => {
+          navigator.vibrate?.(200);
+
+          await stopScanner();
+
+          await sendToApi(decodedText);
+        },
+        () => {}
+      );
     } catch (error) {
       console.error(error);
     }
   };
 
-  useEffect(() => {
-    return () => {
-      stopScanner();
-    };
-  }, []);
+  initScanner();
+}, [isScanning]);
 
   return (
     <div className="scanner-page">
@@ -157,7 +196,7 @@ export default function AssetScanner() {
 
           {/* <div className="title-line"></div> */}
 
-          {!isScanning ? (
+          {isScanning ? (
             <div className="scanner-frame">
               <div className="qr-box">
                 <img className="qr-image" src={assets.qrcode6} alt="" />
