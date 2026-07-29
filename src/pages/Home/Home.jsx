@@ -12,7 +12,8 @@ import IconButton from "@mui/material/IconButton";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 
-const Home = ({ mode, setMode }) => {
+// const Home = ({ mode, setMode }) => {
+const Home = () => {
   const [barcode, setBarcode] = useState("");
   const [showScanner, setShowScanner] = useState(false);
   const [showForm, setShowForm] = useState(false);

@@ -6,15 +6,19 @@ import { assets } from "../../assets/assets";
 // import logo from "../assets/logo.png";
 // import qrImage from "../assets/sample-qr.png";
 
-import {
-    Card,
-    Chip,
-    Fab,
-    Typography,
-} from "@mui/material";
+// import {
+//     Card,
+//     Chip,
+//     Fab,
+//     Typography,
+// } from "@mui/material";
 
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AssetRequestMobile from "../../components/AssetRequestMobile/AssetRequestMobile";
+import { MdOutlineQrCodeScanner } from "react-icons/md";
+import { BsQrCodeScan } from "react-icons/bs";
+import { GrClose } from "react-icons/gr";
+import { HiOutlineAtSymbol } from "react-icons/hi2";
 
 export default function AssetScanner() {
     const scannerRef = useRef(null);
@@ -285,7 +289,7 @@ export default function AssetScanner() {
                                     </p>
                                 )}
 
-                                    <div className="badge">
+                                <div className="badge">
                                     SMR@NECTEC
                                 </div>
 
@@ -313,7 +317,8 @@ export default function AssetScanner() {
                                             : startScanner
                                     }
                                 >
-                                    {isScanning ? "✕" : "⌲"}
+                                    {/* {isScanning ? "✕" : "⌲"} */}
+                                    {isScanning ? <GrClose className="icon-btn"/>: <BsQrCodeScan className="icon-btn" />}
                                 </button>
                             )}
 

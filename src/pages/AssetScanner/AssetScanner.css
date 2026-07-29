@@ -12,7 +12,8 @@ body,
 }
 
 body {
-  font-family: "Prompt", sans-serif;
+  /* font-family: "Prompt", sans-serif; */
+  font-family: Outfit;
   background: #eef2f8;
 }
 
@@ -217,7 +218,8 @@ body {
   }
 
   to {
-    top: 180px;
+    /* top: 180px; */
+    top: 130px;
   }
 }
 
@@ -237,7 +239,10 @@ body {
 
   background: #dbeafe;
 
-  color: #2563eb;
+  /* color: #2563eb; */
+  color: #f80808;
+  font-family: Segoe UI;
+  font-weight: 600 !important;
 }
 
 .camera-box {
@@ -346,4 +351,14 @@ height: auto;
 
   color: #08186b;
   font-weight: 600;
+}
+
+.icon-btn{
+    width: 50px;
+    margin-top: 8px;
+    color: white;
+}
+.symbol{
+    /* color: red; */
+    /* margin-top: 5px; */
 }
