@@ -8,7 +8,11 @@ import ShowForm from "../../components/ShowForm/ShowForm";
 import AssetRequestMobile from "../../components/AssetRequestMobile/AssetRequestMobile";
 import AssetRequestMobile2 from "../../components/AssetRequestMobile2/AssetRequestMobile2";
 
-const Home = () => {
+import IconButton from "@mui/material/IconButton";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+
+const Home = ({ mode, setMode }) => {
   const [barcode, setBarcode] = useState("");
   const [showScanner, setShowScanner] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -48,25 +52,26 @@ const Home = () => {
 
   return (
     <>
-      <div className='home'>
-        {/* <Navbar /> */}
+    {/* <IconButton
+      onClick={() =>
+      setMode(mode === "light" ? "dark" : "light")
+      }
+      >
+      {mode === "light"
+      ? <DarkModeIcon />
+      : <LightModeIcon />}
+    </IconButton> */}
 
+      <div className='home'>
         {(!showScanner && !showForm) && (
-                <>
-                <Navbar />
-                <LogoQrCode />
-                <div className='btn-scan' onClick={openScanner}>
-                  <LuScanText className='icon-qrcode' />
-                  <div className='text-scan'>SCAN</div>
-                </div>
-                {/* <div className="input-box">
-                  <input
-                    className="input"
-                    value={barcode}
-                    onChange={(e) => setBarcode(e.target.value)}
-                  />
-                </div> */}
-                </>
+            <>
+              <Navbar />
+              <LogoQrCode />
+              <div className='btn-scan' onClick={openScanner}>
+                <LuScanText className='icon-qrcode' />
+                <div className='text-scan'>SCAN</div>
+              </div>
+            </>
         )}
 
         
