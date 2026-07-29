@@ -51,37 +51,41 @@ export default function AssetScanner() {
     }
   };
 
-  const startScanner = async () => {
-    try {
-      if (scannerRef.current) return;
+  const startScanner = () => {
+  setIsScanning(true);
+};
 
-      const scanner = new Html5Qrcode("reader");
+//   const startScanner = async () => {
+//     try {
+//       if (scannerRef.current) return;
 
-      scannerRef.current = scanner;
+//       const scanner = new Html5Qrcode("reader");
 
-      setIsScanning(true);
+//       scannerRef.current = scanner;
 
-      await scanner.start(
-        {
-          facingMode: "environment",
-        },
-        {
-          fps: 10,
-          qrbox: 250,
-        },
-        async (decodedText) => {
-          navigator.vibrate?.(200);
+//       setIsScanning(true);
 
-          await stopScanner();
+//       await scanner.start(
+//         {
+//           facingMode: "environment",
+//         },
+//         {
+//           fps: 10,
+//           qrbox: 250,
+//         },
+//         async (decodedText) => {
+//           navigator.vibrate?.(200);
 
-          await sendToApi(decodedText);
-        },
-        () => {}
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
+//           await stopScanner();
+
+//           await sendToApi(decodedText);
+//         },
+//         () => {}
+//       );
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
 
   const stopScanner = async () => {
     try {
@@ -105,11 +109,60 @@ export default function AssetScanner() {
 //     };
 //   }, []);
 
-  useEffect(() => {
-  const initScanner = async () => {
-    if (!isScanning || scannerRef.current) return;
+//   useEffect(() => {
+//   const initScanner = async () => {
+//     // Debug
+//     console.log(
+//     "reader =",
+//     document.getElementById("reader")
+//     );
 
+//     if (!isScanning || scannerRef.current) return;
+
+//     try {
+//       const scanner = new Html5Qrcode("reader");
+
+//       scannerRef.current = scanner;
+
+//       await scanner.start(
+//         {
+//           facingMode: "environment",
+//         },
+//         {
+//           fps: 10,
+//           qrbox: {
+//             width: 250,
+//             height: 250,
+//           },
+//         },
+//         async (decodedText) => {
+//           navigator.vibrate?.(200);
+
+//           await stopScanner();
+
+//           await sendToApi(decodedText);
+//         },
+//         () => {}
+//       );
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   initScanner();
+// }, [isScanning]);
+
+useEffect(() => {
+  if (!isScanning) return;
+
+  const initScanner = async () => {
     try {
+      const readerEl = document.getElementById("reader");
+
+      console.log("reader =", readerEl);
+
+      if (!readerEl) return;
+
       const scanner = new Html5Qrcode("reader");
 
       scannerRef.current = scanner;
@@ -126,20 +179,21 @@ export default function AssetScanner() {
           },
         },
         async (decodedText) => {
-          navigator.vibrate?.(200);
-
           await stopScanner();
-
           await sendToApi(decodedText);
-        },
-        () => {}
+        }
       );
     } catch (error) {
       console.error(error);
     }
   };
 
-  initScanner();
+  const timer = setTimeout(() => {
+    initScanner();
+  }, 300);
+
+  return () => clearTimeout(timer);
+
 }, [isScanning]);
 
   return (
@@ -197,6 +251,15 @@ export default function AssetScanner() {
           {/* <div className="title-line"></div> */}
 
           {isScanning ? (
+            <div
+            id="reader"
+            className="camera-box"
+            >
+            Loading camera...
+            </div>
+          ) : (
+           
+
             <div className="scanner-frame">
               <div className="qr-box">
                 <img className="qr-image" src={assets.qrcode6} alt="" />
@@ -204,11 +267,6 @@ export default function AssetScanner() {
                 <div className="scan-line"></div>
               </div>
             </div>
-          ) : (
-            <div
-              id="reader"
-              className="camera-box"
-            />
           )}
 
           <p className="description">
