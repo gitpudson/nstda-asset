@@ -22,8 +22,8 @@ function App() {
 
   return (
     <>
-      {/* <ThemeProvider theme={theme}> */}
-        {/* <CssBaseline /> */}
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
         <div className="app">
           {/* <Home mode={mode} setMode={setMode}/> */}
           {/* <Home2 /> */}
@@ -34,7 +34,7 @@ function App() {
          
           
         </div>
-      {/* </ThemeProvider> */}
+      </ThemeProvider>
     </>
   )
 }
