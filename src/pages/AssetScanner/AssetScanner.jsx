@@ -180,6 +180,7 @@ useEffect(() => {
           },
         },
         async (decodedText) => {
+          setScanResult(decodedText);
           await stopScanner();
           await sendToApi(decodedText);
         }
