@@ -16,220 +16,224 @@ import {
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 export default function AssetScanner() {
-  const scannerRef = useRef(null);
+    const scannerRef = useRef(null);
 
-  const [isScanning, setIsScanning] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [scanResult, setScanResult] = useState("");
+    const [isScanning, setIsScanning] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [scanResult, setScanResult] = useState("");
 
-  const sendToApi = async (qrValue) => {
-    try {
-      setLoading(true);
+    const sendToApi = async (qrValue) => {
+        try {
+            setLoading(true);
 
-      const response = await fetch(
-        "YOUR_API_ENDPOINT",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            qrCode: qrValue,
-          }),
+            const response = await fetch(
+                "YOUR_API_ENDPOINT",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        qrCode: qrValue,
+                    }),
+                }
+            );
+
+            const data = await response.json();
+
+            console.log(data);
+
+            // ตัวอย่าง
+            // navigate(`/asset/${data.id}`);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
         }
-      );
+    };
 
-      const data = await response.json();
+    const startScanner = () => {
+        setIsScanning(true);
+    };
 
-      console.log(data);
+    //   const startScanner = async () => {
+    //     try {
+    //       if (scannerRef.current) return;
 
-      // ตัวอย่าง
-      // navigate(`/asset/${data.id}`);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    //       const scanner = new Html5Qrcode("reader");
 
-  const startScanner = () => {
-  setIsScanning(true);
-};
+    //       scannerRef.current = scanner;
 
-//   const startScanner = async () => {
-//     try {
-//       if (scannerRef.current) return;
+    //       setIsScanning(true);
 
-//       const scanner = new Html5Qrcode("reader");
+    //       await scanner.start(
+    //         {
+    //           facingMode: "environment",
+    //         },
+    //         {
+    //           fps: 10,
+    //           qrbox: 250,
+    //         },
+    //         async (decodedText) => {
+    //           navigator.vibrate?.(200);
 
-//       scannerRef.current = scanner;
+    //           await stopScanner();
 
-//       setIsScanning(true);
+    //           await sendToApi(decodedText);
+    //         },
+    //         () => {}
+    //       );
+    //     } catch (error) {
+    //       console.error(error);
+    //     }
+    //   };
 
-//       await scanner.start(
-//         {
-//           facingMode: "environment",
-//         },
-//         {
-//           fps: 10,
-//           qrbox: 250,
-//         },
-//         async (decodedText) => {
-//           navigator.vibrate?.(200);
+    const stopScanner = async () => {
+        try {
+            if (scannerRef.current) {
+                await scannerRef.current.stop();
+                await scannerRef.current.clear();
+                scannerRef.current = null;
+            }
 
-//           await stopScanner();
 
-//           await sendToApi(decodedText);
-//         },
-//         () => {}
-//       );
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-
-  const stopScanner = async () => {
-    try {
-      if (scannerRef.current) {
-        await scannerRef.current.stop();
-        await scannerRef.current.clear();
-        scannerRef.current = null;
-      }
-
-     
-    } catch (error) {
-      console.error(error);
-    }
-
-     setIsScanning(false);
-  };
-
-//   useEffect(() => {
-//     return () => {
-//       stopScanner();
-//     };
-//   }, []);
-
-//   useEffect(() => {
-//   const initScanner = async () => {
-//     // Debug
-//     console.log(
-//     "reader =",
-//     document.getElementById("reader")
-//     );
-
-//     if (!isScanning || scannerRef.current) return;
-
-//     try {
-//       const scanner = new Html5Qrcode("reader");
-
-//       scannerRef.current = scanner;
-
-//       await scanner.start(
-//         {
-//           facingMode: "environment",
-//         },
-//         {
-//           fps: 10,
-//           qrbox: {
-//             width: 250,
-//             height: 250,
-//           },
-//         },
-//         async (decodedText) => {
-//           navigator.vibrate?.(200);
-
-//           await stopScanner();
-
-//           await sendToApi(decodedText);
-//         },
-//         () => {}
-//       );
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-
-//   initScanner();
-// }, [isScanning]);
-
-useEffect(() => {
-  if (!isScanning) return;
-
-  const initScanner = async () => {
-    try {
-      const readerEl = document.getElementById("reader");
-
-      console.log("reader =", readerEl);
-
-      if (!readerEl) return;
-
-      const scanner = new Html5Qrcode("reader");
-
-      scannerRef.current = scanner;
-
-      await scanner.start(
-        {
-          facingMode: "environment",
-        },
-        {
-          fps: 10,
-          qrbox: {
-            width: 250,
-            height: 250,
-          },
-        },
-        async (decodedText) => {
-          setScanResult(decodedText);
-          await stopScanner();
-          await sendToApi(decodedText);
+        } catch (error) {
+            console.error(error);
         }
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
-  const timer = setTimeout(() => {
-    initScanner();
-  }, 300);
+        setIsScanning(false);
+    };
 
-  return () => clearTimeout(timer);
+    //   useEffect(() => {
+    //     return () => {
+    //       stopScanner();
+    //     };
+    //   }, []);
 
-}, [isScanning]);
+    //   useEffect(() => {
+    //   const initScanner = async () => {
+    //     // Debug
+    //     console.log(
+    //     "reader =",
+    //     document.getElementById("reader")
+    //     );
 
-  return (
-    <div className="scanner-page">
-      <header className="header">
-        <div className="circle left"></div>
-        <div className="circle right"></div>
-        
-        {/* <img className="logo" src={assets.co} alt="" /> */}
+    //     if (!isScanning || scannerRef.current) return;
 
-        <h1>ระบบตรวจสอบครุภัณฑ์</h1>
+    //     try {
+    //       const scanner = new Html5Qrcode("reader");
 
-        {/* <p className="subtitle">
-          สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน
-        </p> */}
+    //       scannerRef.current = scanner;
 
-        {/* <Chip
-            className="budget-chip"
-            icon={<CalendarMonthIcon />}
-            label={`สวทช. ปีงบประมาณ ${new Date().getFullYear() + 543}`}
-        /> */}
+    //       await scanner.start(
+    //         {
+    //           facingMode: "environment",
+    //         },
+    //         {
+    //           fps: 10,
+    //           qrbox: {
+    //             width: 250,
+    //             height: 250,
+    //           },
+    //         },
+    //         async (decodedText) => {
+    //           navigator.vibrate?.(200);
 
-        <div className="budget-pill">
-          📅 สวทช. ปีงบประมาณ 2569
-        </div>
+    //           await stopScanner();
 
-        <div className="header-wave">
-          <svg
-            viewBox="0 0 1440 180"
-            preserveAspectRatio="none"
-          >
-            <path
-              fill="#EEF2F8"
-              d="
+    //           await sendToApi(decodedText);
+    //         },
+    //         () => {}
+    //       );
+    //     } catch (error) {
+    //       console.error(error);
+    //     }
+    //   };
+
+    //   initScanner();
+    // }, [isScanning]);
+
+    useEffect(() => {
+        if (!isScanning) return;
+
+        const initScanner = async () => {
+            try {
+                const readerEl = document.getElementById("reader");
+
+                console.log("reader =", readerEl);
+
+                if (!readerEl) return;
+
+                const scanner = new Html5Qrcode("reader");
+
+                scannerRef.current = scanner;
+
+                await scanner.start(
+                    {
+                        facingMode: "environment",
+                    },
+                    {
+                        fps: 10,
+                        qrbox: {
+                            width: 250,
+                            height: 250,
+                        },
+                    },
+                    async (decodedText) => {
+                        setScanResult(decodedText);
+                        await stopScanner();
+                        await sendToApi(decodedText);
+                    }
+                );
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        const timer = setTimeout(() => {
+            initScanner();
+        }, 300);
+
+        return () => clearTimeout(timer);
+
+    }, [isScanning]);
+
+    return (
+        <>
+
+            {!scanResult && (
+                <>
+                    <div className="scanner-page">
+                        <header className="header">
+                            <div className="circle left"></div>
+                            <div className="circle right"></div>
+
+                            {/* <img className="logo" src={assets.co} alt="" /> */}
+
+                            <h1>ระบบตรวจสอบครุภัณฑ์</h1>
+
+                            {/* <p className="subtitle">
+                        สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน
+                    </p> */}
+
+                            {/* <Chip
+                        className="budget-chip"
+                        icon={<CalendarMonthIcon />}
+                        label={`สวทช. ปีงบประมาณ ${new Date().getFullYear() + 543}`}
+                    /> */}
+
+                            <div className="budget-pill">
+                                📅 สวทช. ปีงบประมาณ 2569
+                            </div>
+
+                            <div className="header-wave">
+                                <svg
+                                    viewBox="0 0 1440 180"
+                                    preserveAspectRatio="none"
+                                >
+                                    <path
+                                        fill="#EEF2F8"
+                                        d="
               M0,96
               C240,20
               480,20
@@ -241,81 +245,87 @@ useEffect(() => {
               L0,180
               Z
             "
-            />
-          </svg>
-        </div>
-      </header>
+                                    />
+                                </svg>
+                            </div>
+                        </header>
 
-      <main className="content">
-        <div className="qr-card">
-          <h2>สแกนคิวอาร์โค้ด</h2>
+                        <main className="content">
+                            <div className="qr-card">
+                                <h2>สแกนคิวอาร์โค้ด</h2>
 
-          {/* <div className="title-line"></div> */}
+                                {/* <div className="title-line"></div> */}
 
-          {isScanning ? (
-            <div
-            id="reader"
-            className="camera-box"
-            >
-            Loading camera...
-            </div>
-          ) : (
-           
+                                {isScanning ? (
+                                    <div
+                                        id="reader"
+                                        className="camera-box"
+                                    >
+                                        Loading camera...
+                                    </div>
+                                ) : (
 
-            <div className="scanner-frame">
-              <div className="qr-box">
-                <img className="qr-image" src={assets.qrcode6} alt="" />
 
-                <div className="scan-line"></div>
-              </div>
-            </div>
-          )}
+                                    <div className="scanner-frame">
+                                        <div className="qr-box">
+                                            <img className="qr-image" src={assets.qrcode6} alt="" />
 
-          {/* <p className="description">
+                                            <div className="scan-line"></div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* <p className="description">
             เพื่อตรวจสอบข้อมูลครุภัณฑ์
           </p> */}
-          {scanResult && (
-            <p className="description">
-                {scanResult}
-            </p>
-          )}
+                                {scanResult && (
+                                    <p className="description">
+                                        {scanResult}
+                                    </p>
+                                )}
 
-          <div className="badge">
-            SMR@NECTEC
-          </div>
-        </div>
+                                <div className="badge">
+                                    SMR@NECTEC
+                                </div>
+                            </div>
 
-      </main>
+                        </main>
 
-      <div className="bottom-wave"></div>
+                        <div className="bottom-wave"></div>
 
-      <div className="scan-button-wrapper">
-        {loading ? (
-          <button
-            className="scan-button"
-            disabled
-          >
-            ...
-          </button>
-        ) : (
-          <button
-            className="scan-button"
-            onClick={
-              isScanning
-                ? stopScanner
-                : startScanner
-            }
-          >
-            {isScanning ? "✕" : "⌲"}
-          </button>
-        )}
+                        <div className="scan-button-wrapper">
+                            {loading ? (
+                                <button
+                                    className="scan-button"
+                                    disabled
+                                >
+                                    ...
+                                </button>
+                            ) : (
+                                <button
+                                    className="scan-button"
+                                    onClick={
+                                        isScanning
+                                            ? stopScanner
+                                            : startScanner
+                                    }
+                                >
+                                    {isScanning ? "✕" : "⌲"}
+                                </button>
+                            )}
 
-        {/* <span>
+                            {/* <span>
           {isScanning
             ? "ปิดกล้อง"
             : "สแกน"}
         </span> */}
-      </div>
-    </div>
-  );
+                        </div>
+                    </div>
+                </>
+            )}
+
+            {scanResult && (<AssetRequestMobile qrcode={scanResult} />)}
+        </>
+
+    );
 }
