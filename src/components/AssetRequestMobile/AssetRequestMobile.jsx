@@ -681,8 +681,8 @@ useEffect(() => {
 
       </Card>
 
-      {/* {(isSaving) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>} */}
-    {(isSaving) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>}
+      {(isSaving) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>}
+    {/* {(isSaving) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>} */}
 
        {/* Save */}
       <Box className="footer">

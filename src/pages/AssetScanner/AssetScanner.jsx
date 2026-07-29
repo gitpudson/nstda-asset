@@ -214,14 +214,14 @@ export default function AssetScanner() {
                             <h1>ระบบตรวจสอบครุภัณฑ์</h1>
 
                             {/* <p className="subtitle">
-                        สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน
-                    </p> */}
+                                สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน
+                            </p> */}
 
-                            {/* <Chip
-                        className="budget-chip"
-                        icon={<CalendarMonthIcon />}
-                        label={`สวทช. ปีงบประมาณ ${new Date().getFullYear() + 543}`}
-                    /> */}
+                                    {/* <Chip
+                                className="budget-chip"
+                                icon={<CalendarMonthIcon />}
+                                label={`สวทช. ปีงบประมาณ ${new Date().getFullYear() + 543}`}
+                            /> */}
 
                             <div className="budget-pill">
                                 📅 สวทช. ปีงบประมาณ 2569
@@ -235,17 +235,17 @@ export default function AssetScanner() {
                                     <path
                                         fill="#EEF2F8"
                                         d="
-              M0,96
-              C240,20
-              480,20
-              720,70
-              C960,115
-              1200,115
-              1440,70
-              L1440,180
-              L0,180
-              Z
-            "
+                                        M0,96
+                                        C240,20
+                                        480,20
+                                        720,70
+                                        C960,115
+                                        1200,115
+                                        1440,70
+                                        L1440,180
+                                        L0,180
+                                        Z
+                                        "
                                     />
                                 </svg>
                             </div>
@@ -277,18 +277,20 @@ export default function AssetScanner() {
                                 )}
 
                                 {/* <p className="description">
-            เพื่อตรวจสอบข้อมูลครุภัณฑ์
-          </p> */}
+                                    เพื่อตรวจสอบข้อมูลครุภัณฑ์
+                                </p> */}
                                 {scanResult && (
                                     <p className="description">
                                         {scanResult}
                                     </p>
                                 )}
 
-                                <div className="badge">
+                                    <div className="badge">
                                     SMR@NECTEC
                                 </div>
-                            </div>
+
+                            </div>                         
+                                         
 
                         </main>
 
@@ -316,11 +318,13 @@ export default function AssetScanner() {
                             )}
 
                             {/* <span>
-          {isScanning
-            ? "ปิดกล้อง"
-            : "สแกน"}
-        </span> */}
-                        </div>
+                            {isScanning
+                                ? "ปิดกล้อง"
+                                : "สแกน"}
+                            </span> */}
+                                </div>
+
+
                     </div>
                 </>
             )}
