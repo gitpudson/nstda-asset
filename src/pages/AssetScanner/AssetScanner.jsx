@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import AssetRequestMobile from "../../components/AssetRequestMobile/AssetRequestMobile";
 
 export default function AssetScanner() {
     const scannerRef = useRef(null);
@@ -325,6 +326,7 @@ export default function AssetScanner() {
             )}
 
             {scanResult && (<AssetRequestMobile qrcode={scanResult} />)}
+            {/* <AssetRequestMobile qrcode={scanResult} /> */}
         </>
 
     );
