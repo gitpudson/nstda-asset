@@ -10,6 +10,7 @@ import AssetForm from './components/AssetForm/AssetForm';
 
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import { getTheme } from "./theme/theme";
+import AssetScanner from './pages/QrScannerPage/QrScannerPage';
 
 function App() {
 
@@ -25,7 +26,12 @@ function App() {
         <CssBaseline />
         <div className="app">
           {/* <Home mode={mode} setMode={setMode}/> */}
-          <Home2 />
+          {/* <Home2 /> */}
+          {/* <div className="mobile-container">
+            <AssetScanner />
+          </div> */}
+          <AssetScanner />
+          
         </div>
       </ThemeProvider>
     </>
