@@ -59,8 +59,13 @@ export default function Home2() {
   };
 
   return (
+    <>    
+    
     <div className="home-page">
-      {/* Header */}
+
+        {(!showScanner && !showForm) && (
+            <>
+                    {/* Header */}
       <div className="hero-section">
         {/* <img
           src={assets.co}
@@ -139,15 +144,22 @@ export default function Home2() {
           สแกน
         </Typography> */}
       </div>
-
-      {showScanner && (
-                <div className="scannerModal">
-                    <div id="reader"></div>
-                </div>
+            </>
         )}
 
-        {showForm && ( <AssetRequestMobile  qrcode =  {barcode} />)}
+        {showScanner && (
+        <div className="scannerModal">
+            <div id="reader"></div>
+        </div>
+         )}
+
+    {showForm && ( <AssetRequestMobile  qrcode =  {barcode} />)}
+
 
     </div>
+    
+  
+
+    </>
   );
 }
