@@ -421,6 +421,14 @@ useEffect(() => {
     <Box className="header-box">
     <IconButton>
         {/* <ArrowBackIcon /> */}
+        <img className="logo-org" src={formData.org_owner === "สก." ? assets.co :
+                               formData.org_owner === "ศอ." ? assets.nectec :
+                               formData.org_owner === "ศช." ? assets.biotec :
+                               formData.org_owner === "ศว." ? assets.mtec :
+                               formData.org_owner === "ศล." ? assets.entec :
+                               formData.org_owner === "ศน." ? assets.nanotec : ""
+
+    } /> 
     </IconButton>
 
     <Typography variant="h6" fontWeight={300}>
@@ -428,14 +436,7 @@ useEffect(() => {
     </Typography>
     
  
-    <img className="logo-org" src={formData.org_owner === "สก." ? assets.co :
-                               formData.org_owner === "ศอ." ? assets.nectec :
-                               formData.org_owner === "ศช." ? assets.biotec :
-                               formData.org_owner === "ศว." ? assets.mtec :
-                               formData.org_owner === "ศล." ? assets.entec :
-                               formData.org_owner === "ศน." ? assets.nanotec : ""
-
-    } />    
+       
 
       </Box>
           
