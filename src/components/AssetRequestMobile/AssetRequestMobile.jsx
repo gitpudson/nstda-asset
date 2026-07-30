@@ -737,6 +737,14 @@ useEffect(() => {
             ))}
         </Box> */}
 
+        {
+            formData.updated_at !== "" ?(
+                  <Typography className="label">
+                    แก้ไขล่าสุด {formatDate(formData.updated_at)}
+                  </Typography>
+            ) : ""
+        }
+
         <Box className="gallery">
             {images
             .filter((item) => item.preview)
@@ -749,33 +757,26 @@ useEffect(() => {
                 className="preview"
                 />
             ))}
-        </Box>
-
-        {
-            formData.updated_at !== "" ?(
-                  <Typography className="label">
-                    Updated {formatDate(formData.updated_at)}
-                  </Typography>
-            ) : ""
-        }
+        </Box>       
       
 
       </Card>
 
-      {(isSaving) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>}
+      {/* {(isSaving) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>} */}
     {/* {(isSaving) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>} */}
 
        {/* Save */}
       <Box className="footer">
         <Button
           fullWidth
-          startIcon={<SaveIcon />}
+        //   startIcon={<SaveIcon />}
+          startIcon={(isSaving) && <img className='loading' src="./spinner.svg" alt="" />}
           variant="contained"
           onClick={handleSave}
           className="save-btn"
           disabled={isSaving}
         >
-          {isSaving ? "Saving..." : "Save"}
+          {isSaving ? "Saving....." : "Save"}
         </Button>
       </Box>
 
