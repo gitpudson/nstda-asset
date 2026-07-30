@@ -770,7 +770,7 @@ useEffect(() => {
         <Button
           fullWidth
         //   startIcon={<SaveIcon />}
-          startIcon={(isSaving) && <img className='loading' src="./spinner.svg" alt="" />}
+          startIcon={isSaving ? <img className='loading' src="./spinner.svg" alt="" /> : <SaveIcon /> }
           variant="contained"
           onClick={handleSave}
           className="save-btn"
