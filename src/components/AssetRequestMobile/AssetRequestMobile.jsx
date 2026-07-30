@@ -30,6 +30,7 @@ export default function AssetRequestMobile({ qrcode }) {
   const [imgPerson,setImgPerson] = useState();
   const [data,setData] = useState({});
   const [statusList,setStatusList] = useState([]);
+//   const [location,setLocation] = useState({});
 //   const [saving, setSaving] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -398,8 +399,8 @@ useEffect(() => {
   
           const status = await fetStatus();  
           setStatusList(status);
-        //   console.log("statusList =", statusList);      
-          
+        //   console.log("statusList =", statusList);     
+                  
       };
   
       loadData();   
@@ -556,7 +557,8 @@ useEffect(() => {
             NECTEC
           </MenuItem>
         </TextField> */}
-        <TextField
+
+        {/* <TextField
             select
             fullWidth
             size="small"
@@ -582,7 +584,34 @@ useEffect(() => {
             {building}
             </MenuItem>
             ))}
-        </TextField>
+        </TextField> */}
+
+        <TextField
+  select
+  fullWidth
+  size="small"
+  name="new_building"
+  value={formData.new_building || ""}
+  onChange={(e) => {
+    handleChange(e);
+
+    setFormData((prev) => ({
+      ...prev,
+      new_building: e.target.value,
+      new_floor: "",
+      new_room: "",
+    }));
+  }}
+>
+  {(location?.Building || []).map((building) => (
+    <MenuItem
+      key={building}
+      value={building}
+    >
+      {building}
+    </MenuItem>
+  ))}
+</TextField>
 
         <Typography className="label">
           ชั้น

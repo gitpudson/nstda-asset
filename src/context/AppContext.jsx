@@ -43,6 +43,7 @@ const AppContextProvider = (props) => {
     }
 
     const fetLocation = async (org) => {
+        console.log("fetLocation");
         const post = {
             function: 'getLocation',
             payload: {
@@ -89,9 +90,12 @@ const AppContextProvider = (props) => {
         )
 
         if (response.data.success) {
-            // console.log(response.data.data.person_name);
-            setIsLoading(false);
+            console.log(response.data.data.org_owner);
+            fetLocation(response.data.data.org_owner);
+            setIsLoading(false);            
             return response.data.data;
+            
+            
         }
 
     }
@@ -123,7 +127,8 @@ const AppContextProvider = (props) => {
     }
 
     const SaveData = async (post) => {
-        
+        console.log("Save");
+        console.log(post);
 
         setIsSaving(true);
         const response = await axios.post(`${url_api_backend}`, post,
@@ -152,7 +157,7 @@ const AppContextProvider = (props) => {
 
     useEffect(() => {
         // fetAllBuilding();  
-        fetLocation("ศล.");  
+        // fetLocation("ศล.");  
        
     },[])
 
@@ -168,7 +173,8 @@ const AppContextProvider = (props) => {
         fetStatus,
         SaveData,
         isSaving,
-        location
+        location,
+        fetLocation
     }
 
     return (
