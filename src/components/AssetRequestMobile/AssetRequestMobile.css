@@ -102,6 +102,10 @@
   ) !important;
 }
 
+.loading{
+    width: 100px;
+}
+
 .loading-save{
     width: 45px;
 }
