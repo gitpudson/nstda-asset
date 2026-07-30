@@ -337,13 +337,21 @@ const handleSave = async () => {
         
 };
 
-const filteredFloors = location.Floor.filter(
-item => item.Building === formData.new_building
-);
+// const filteredFloors = location.Floor.filter(
+// item => item.Building === formData.new_building
+// );
 
-const filteredRooms = location.Room.filter(
-item => item.Floor === formData.new_floor
-);
+// const filteredRooms = location.Room.filter(
+// item => item.Floor === formData.new_floor
+// );
+
+const filteredFloors = location?.Floor?.filter(
+  item => item.Building === formData.new_building
+) || [];
+
+const filteredRooms = location?.Room?.filter(
+  item => item.Floor === formData.new_floor
+) || [];
 
 
 useEffect(() => {
