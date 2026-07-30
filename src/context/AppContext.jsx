@@ -13,6 +13,7 @@ const AppContextProvider = (props) => {
     const [menu_building, setMenuBuilding] = useState("");
     const [isLoading,setIsLoading] = useState(true);
     const [isSaving,setIsSaving] = useState(false);
+    const [location,setLocation] = useState({});
 
 
     const fetAllBuilding = async () => {
@@ -36,6 +37,32 @@ const AppContextProvider = (props) => {
         if (response.data.success) {
             setDataBuilding(response.data.data);
             setIsLoading(false)
+            console.log(response.data.data);
+        }
+
+    }
+
+    const fetLocation = async (org) => {
+        const post = {
+            function: 'getLocation',
+            payload: {
+                "org": org
+            }
+        }
+
+        // setIsLoading(true)
+        const response = await axios.post(`${url_api_backend}`, post,
+            {
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+                mode: "no-cors"
+            }
+        )
+
+        if (response.data.success) {
+            setLocation(response.data.data);
+            // setIsLoading(false)
             console.log(response.data.data);
         }
 
@@ -125,6 +152,7 @@ const AppContextProvider = (props) => {
 
     useEffect(() => {
         // fetAllBuilding();  
+        fetLocation("ศล.");  
        
     },[])
 
@@ -139,7 +167,8 @@ const AppContextProvider = (props) => {
         fetAssetByAssetCode,
         fetStatus,
         SaveData,
-        isSaving
+        isSaving,
+        location
     }
 
     return (

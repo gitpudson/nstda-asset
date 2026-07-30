@@ -24,7 +24,7 @@ import Swal from "sweetalert2";
 
 export default function AssetRequestMobile({ qrcode }) {
 
-  const { url_api_backend, fetAssetByAssetCode ,fetStatus,isLoading,SaveData,isSaving} = useContext(AppContext);
+  const { url_api_backend, fetAssetByAssetCode ,fetStatus,isLoading,SaveData,isSaving,location} = useContext(AppContext);
 
   const [images, setImages] = useState([]);
   const [imgPerson,setImgPerson] = useState();
@@ -337,6 +337,14 @@ const handleSave = async () => {
         
 };
 
+const filteredFloors = location.Floor.filter(
+item => item.Building === formData.new_building
+);
+
+const filteredRooms = location.Room.filter(
+item => item.Floor === formData.new_floor
+);
+
 
 useEffect(() => {
       const loadData = async () => {         
@@ -518,7 +526,7 @@ useEffect(() => {
           อาคาร
         </Typography>
 
-        <TextField
+        {/* <TextField
           select
           fullWidth
           size="small"
@@ -539,6 +547,33 @@ useEffect(() => {
           <MenuItem value="NECTEC">
             NECTEC
           </MenuItem>
+        </TextField> */}
+        <TextField
+            select
+            fullWidth
+            size="small"
+            name="new_building"
+            value={formData.new_building || ""}
+            onChange={(e) => {
+            handleChange(e);
+
+            // Reset ชั้นและห้องเมื่อเปลี่ยนอาคาร
+            setFormData(prev => ({
+            ...prev,
+            new_building: e.target.value,
+            new_floor: "",
+            new_room: "",
+            }));
+            }}
+            >
+            {location.Building.map((building) => (
+            <MenuItem
+            key={building}
+            value={building}
+            >
+            {building}
+            </MenuItem>
+            ))}
         </TextField>
 
         <Typography className="label">
@@ -546,26 +581,28 @@ useEffect(() => {
         </Typography>
 
         <TextField
-          select
-          fullWidth
-          size="small"
-          name="floor"
-          value={formData.floor}
-          onChange={handleChange}
-          InputProps={{
-            startAdornment: (
-              <LayersIcon
-                sx={{
-                  mr: 1,
-                  color: "#ff6b00",
-                }}
-              />
-            ),
-          }}
-        >
-          <MenuItem value={formData.floor}>
-            ชั้น 4
-          </MenuItem>
+            select
+            fullWidth
+            size="small"
+            name="new_floor"
+            value={formData.new_floor || ""}
+            onChange={(e) => {
+            setFormData(prev => ({
+            ...prev,
+            new_floor: e.target.value,
+            new_room: "",
+            }));
+            }}
+            disabled={!formData.new_building}
+            >
+            {filteredFloors.map((item) => (
+            <MenuItem
+            key={item.Floor}
+            value={item.Floor}
+            >
+            {item.Floor}
+            </MenuItem>
+            ))}
         </TextField>
 
         <Typography className="label">
@@ -573,16 +610,22 @@ useEffect(() => {
         </Typography>
 
         <TextField
-          select
-          fullWidth
-          size="small"
-          name="room"
-          value={formData.room}
-          onChange={handleChange}
-        >
-          <MenuItem value="PHT และ OEC">
-            PHT และ OEC
-          </MenuItem>
+            select
+            fullWidth
+            size="small"
+            name="new_room"
+            value={formData.new_room || ""}
+            onChange={handleChange}
+            disabled={!formData.new_floor}
+            >
+            {filteredRooms.map((item) => (
+            <MenuItem
+            key={item.Room}
+            value={item.Room}
+            >
+            {item.Room}
+            </MenuItem>
+            ))}
         </TextField>
 
         <Typography className="label">
