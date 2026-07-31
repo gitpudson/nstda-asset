@@ -709,7 +709,7 @@ useEffect(() => {
       <TextField
         select
         fullWidth
-        label="Room"
+        // label="Room"
         value={formData.new_room}
         onChange={(e) =>
           setFormData(prev => ({
