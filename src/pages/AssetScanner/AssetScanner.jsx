@@ -203,7 +203,7 @@ export default function AssetScanner() {
                         //     return;
                         // }
 
-                        const qrText = decodedText.trim().split("-");
+                        const qrText = decodedText.trim();
                         const isValid =
                                         /^\d{4}-\d{3}-\d{4}-\d+$/.test(qrText) ||
                                         /^\d{4}-\d{3}-\d{4}-\d+-\d+$/.test(qrText) ||
