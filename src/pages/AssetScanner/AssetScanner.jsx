@@ -231,7 +231,7 @@ export default function AssetScanner() {
 
                             setScanResult(decodedText);
                             await stopScanner();
-                            await sendToApi(decodedText);
+                            // await sendToApi(decodedText);
 
                         } finally {
                             isProcessingRef.current = false;
