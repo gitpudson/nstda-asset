@@ -186,24 +186,22 @@ export default function AssetScanner() {
                     },
                     async (decodedText) => {
                         
-                        const parts = decodedText.split("-");
+                        // const parts = decodedText.split("-");
 
-                        if (parts.length < 4) {
-                            
-                            Swal.fire({
-                            icon: "error",
-                            title: "เกิดข้อผิดพลาด",
-                            text: "กรุณาสแกน QR Code ที่เป็นของครุภัณฑ์เท่านั้น",
-                            });
-                            
-                            setScanResult("");
-                            await stopScanner();
-                            return;
+                        const assetPattern = /^\d{4}-\d{3}-\d{4}-\d+$/;
+                        if (!assetPattern.test(decodedText)) {
+                        await Swal.fire({
+                        icon: "error",
+                        title: "เกิดข้อผิดพลาด",
+                        text: "กรุณาสแกน QR Code ที่เป็นของครุภัณฑ์เท่านั้น",
+                        });
+                        setScanResult("");
+                        await stopScanner();
+                        return;
                         }
-
                         setScanResult(decodedText);
                         await stopScanner();
-                        await sendToApi(decodedText);                       
+                        await sendToApi(decodedText);                   
 
                     }
                 );
