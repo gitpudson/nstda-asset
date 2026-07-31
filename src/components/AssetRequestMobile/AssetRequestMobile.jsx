@@ -412,13 +412,13 @@ useEffect(() => {
     <>
     {(isLoading) && <center> 
             <div>
-                <Typography variant="body1" fontWeight={300}>
+                <Typography variant="body1" fontWeight={500}>
                    กำลังค้นหาหมายเลขครุภัณฑ์
                 </Typography>
-                <Typography variant="body1" fontWeight={300} className="label-asset">
+                <Typography variant="body1" fontWeight={500} className="label-asset">
                    { qrcode }
                 </Typography>
-                <Typography variant="body1" fontWeight={300}>
+                <Typography variant="body1" fontWeight={500}>
                    กรุณารอสักครู่.....
                 </Typography>
                 <img className='loading' src="./spinner.svg" alt="" />
