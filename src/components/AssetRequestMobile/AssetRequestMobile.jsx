@@ -590,7 +590,19 @@ useEffect(() => {
           }))
         }
       >
-        {Object.keys(location).map(item => (
+        {/* {Object.keys(location).map(item => (
+          <MenuItem key={item} value={item}>
+            {item}
+          </MenuItem>
+        ))} */}
+        {Object.keys(location)
+        .sort((a, b) =>
+          a.localeCompare(b, "en", {
+            numeric: true,
+            sensitivity: "base",
+          })
+        )
+        .map(item => (
           <MenuItem key={item} value={item}>
             {item}
           </MenuItem>
