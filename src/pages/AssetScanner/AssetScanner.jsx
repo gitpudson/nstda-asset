@@ -27,6 +27,7 @@ export default function AssetScanner() {
     const [isScanning, setIsScanning] = useState(false);
     const [loading, setLoading] = useState(false);
     const [scanResult, setScanResult] = useState("");
+    const isProcessingRef = useRef(false);
 
     const sendToApi = async (qrValue) => {
         try {
@@ -185,26 +186,59 @@ export default function AssetScanner() {
                             height: 250,
                         },
                     },
-                    async (decodedText) => {
+                    // async (decodedText) => {
                         
-                        // const parts = decodedText.split("-");
+                    //     // const parts = decodedText.split("-");
 
-                        const assetPattern = /^\d{4}-\d{3}-\d{4}-\d+$/;
-                        if (!assetPattern.test(decodedText)) {
-                        await Swal.fire({
-                        icon: "error",
-                        title: "เกิดข้อผิดพลาด",
-                        text: "กรุณาสแกน QR Code ที่เป็นของครุภัณฑ์เท่านั้น",
-                        });
-                        setScanResult("");
-                        await stopScanner();
-                        return;
+                    //     const assetPattern = /^\d{4}-\d{3}-\d{4}-\d+$/;
+                    //     if (!assetPattern.test(decodedText)) {
+                    //         await stopScanner();
+                    //         await Swal.fire({
+                    //         icon: "error",
+                    //         title: "เกิดข้อผิดพลาด",
+                    //         text: "กรุณาสแกน QR Code ที่เป็นของครุภัณฑ์เท่านั้น",
+                    //         });
+                    //         setScanResult("");
+                    //         await stopScanner();
+                    //         return;
+                    //     }
+
+                    //     setScanResult(decodedText);                        
+                    //     await sendToApi(decodedText);                   
+
+                    // }
+
+                    async (decodedText) => {
+                        if (isProcessingRef.current) return;
+
+                        isProcessingRef.current = true;
+
+                        try {
+                            const assetPattern = /^\d{4}-\d{3}-\d{4}-\d+$/;
+
+                            if (!assetPattern.test(decodedText)) {
+                                await stopScanner();
+
+                                await Swal.fire({
+                                    icon: "error",
+                                    title: "เกิดข้อผิดพลาด",
+                                    text: "กรุณาสแกน QR Code ที่เป็นของครุภัณฑ์เท่านั้น",
+                                });
+
+                                setScanResult("");
+                                return;
+                            }
+
+                            setScanResult(decodedText);
+                            await stopScanner();
+                            await sendToApi(decodedText);
+
+                        } finally {
+                            isProcessingRef.current = false;
                         }
-                        setScanResult(decodedText);
-                        await stopScanner();
-                        await sendToApi(decodedText);                   
-
                     }
+
+
                 );
             } catch (error) {
                 console.error(error);
