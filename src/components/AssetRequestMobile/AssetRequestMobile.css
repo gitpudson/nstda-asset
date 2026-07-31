@@ -46,6 +46,12 @@
   margin-top: 10px;
 }
 
+.label-asset {
+  font-weight: 700;
+  color: #ff6b00;
+  /* margin-top: 10px; */
+}
+
 .asset-box {
   background: #fff3ec;
   border: 1px solid #ffe0d0;
