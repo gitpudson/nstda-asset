@@ -412,11 +412,9 @@ useEffect(() => {
     <>
     {(isLoading) && <center> 
             <div>
-                <Box className="header-box">
-                    <Typography variant="h6" fontWeight={300}>
-                            กำลังค้นหาหมายเลขครุภัณฑ์ { qrcode } กรุณารอสักครู่.....
-                    </Typography>
-                </Box>
+                <Typography variant="h6" fontWeight={300}>
+                   กำลังค้นหาหมายเลขครุภัณฑ์ { qrcode } กรุณารอสักครู่.....
+                </Typography>
                 <img className='loading' src="./spinner.svg" alt="" />
             </div> 
         </center>}
