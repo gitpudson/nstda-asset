@@ -557,7 +557,7 @@ useEffect(() => {
   ))}
         </TextField> */}
 
-        <TextField
+        {/* <TextField
           select
           fullWidth
           // label="อาคาร"
@@ -575,7 +575,27 @@ useEffect(() => {
           {item}
           </MenuItem>
           ))}
-        </TextField>
+        </TextField> */}
+        <TextField
+        select
+        fullWidth
+        // label="Building"
+        value={formData.new_building}
+        onChange={(e) =>
+          setFormData(prev => ({
+            ...prev,
+            new_building: e.target.value,
+            new_floor: "",
+            new_room: ""
+          }))
+        }
+      >
+        {Object.keys(location).map(item => (
+          <MenuItem key={item} value={item}>
+            {item}
+          </MenuItem>
+        ))}
+      </TextField>
 
         <Typography className="label">
           ชั้น
@@ -605,7 +625,7 @@ useEffect(() => {
             </MenuItem>
             ))}
         </TextField> */}
-        <TextField
+        {/* <TextField
           select
           fullWidth
           // label="ชั้น"
@@ -623,6 +643,27 @@ useEffect(() => {
                 : item}
             </MenuItem>
           ))}
+      </TextField> */}
+      <TextField
+        select
+        fullWidth
+        // label="Floor"
+        value={formData.new_floor}
+        onChange={(e) =>
+          setFormData(prev => ({
+            ...prev,
+            new_floor: e.target.value,
+            new_room: ""
+          }))
+        }
+      >
+        {Object.keys(
+          location[formData.new_building] || {}
+        ).map(item => (
+          <MenuItem key={item} value={item}>
+            {item}
+          </MenuItem>
+        ))}
       </TextField>
 
         <Typography className="label">
@@ -648,7 +689,7 @@ useEffect(() => {
             ))}
         </TextField> */}
 
-        <TextField
+        {/* <TextField
           select
           fullWidth
           // label="ห้อง"
@@ -661,6 +702,25 @@ useEffect(() => {
               key={item}
               value={item}
             >
+              {item}
+            </MenuItem>
+          ))}
+      </TextField> */}
+      <TextField
+        select
+        fullWidth
+        label="Room"
+        value={formData.new_room}
+        onChange={(e) =>
+          setFormData(prev => ({
+            ...prev,
+            new_room: e.target.value
+          }))
+        }
+      >
+        {(location[formData.new_building]?.[formData.new_floor] || [])
+          .map(item => (
+            <MenuItem key={item} value={item}>
               {item}
             </MenuItem>
           ))}
