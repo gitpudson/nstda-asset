@@ -190,16 +190,30 @@ export default function AssetScanner() {
                         
                         // const parts = decodedText.split("-");
 
-                        const assetPattern = /^\d{4}-\d{3}-\d{4}-\d+$/;
-                        if (!assetPattern.test(decodedText)) {
+                        // const assetPattern = /^\d{4}-\d{3}-\d{4}-\d+$/;
+                        // if (!assetPattern.test(decodedText)) {
+                        //     await stopScanner();
+                        //     await Swal.fire({
+                        //     icon: "error",
+                        //     title: "เกิดข้อผิดพลาด",
+                        //     text: "กรุณาสแกน QR Code ที่เป็นของครุภัณฑ์เท่านั้น",
+                        //     });
+                        //     setScanResult("");
+                        //     await stopScanner();
+                        //     return;
+                        // }
+
+                        const parts = decodedText.trim().split("-");
+                        const isValid =(parts.length === 4 || parts.length === 5) &&
+                                        parts.every(part => /^\d+$/.test(part));
+                        if (!isValid) {
                             await stopScanner();
                             await Swal.fire({
-                            icon: "error",
-                            title: "เกิดข้อผิดพลาด",
-                            text: "กรุณาสแกน QR Code ที่เป็นของครุภัณฑ์เท่านั้น",
+                                icon: "error",
+                                title: "เกิดข้อผิดพลาด",
+                                text: "กรุณาสแกน QR Code ที่เป็นของครุภัณฑ์เท่านั้น",
                             });
                             setScanResult("");
-                            await stopScanner();
                             return;
                         }
 
