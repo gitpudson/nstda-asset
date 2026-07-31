@@ -96,11 +96,11 @@ const AppContextProvider = (props) => {
 
             setLocation(response.data.data);
 
-            console.log(response.data.data);
+            // console.log(response.data.data);
 
-            console.log(
-                Object.keys(response.data.data)
-            );
+            // console.log(
+            //     Object.keys(response.data.data)
+            // );
 
         }
 
