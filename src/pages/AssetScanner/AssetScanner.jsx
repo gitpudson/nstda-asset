@@ -189,13 +189,15 @@ export default function AssetScanner() {
                         const parts = decodedText.split("-");
 
                         if (parts.length < 4) {
-                            await stopScanner();
+                            
                             Swal.fire({
                             icon: "error",
                             title: "เกิดข้อผิดพลาด",
                             text: "กรุณาสแกน QR Code ที่เป็นของครุภัณฑ์เท่านั้น",
                             });
+                            
                             setScanResult("");
+                            await stopScanner();
                             return;
                         }
 
