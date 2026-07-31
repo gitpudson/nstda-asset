@@ -410,7 +410,16 @@ useEffect(() => {
 
   return (    
     <>
-    {(isLoading) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>}
+    {(isLoading) && <center> 
+            <div>
+                <Box className="header-box">
+                    <Typography variant="h6" fontWeight={300}>
+                            กำลังค้นหาหมายเลขครุภัณฑ์ { qrcode } กรุณารอสักครู่.....
+                    </Typography>
+                </Box>
+                <img className='loading' src="./spinner.svg" alt="" />
+            </div> 
+        </center>}
     {/* {(isLoading  || isSaving) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>} */}
 
     {(!isLoading) && (
