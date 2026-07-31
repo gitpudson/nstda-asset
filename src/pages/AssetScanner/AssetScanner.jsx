@@ -19,6 +19,7 @@ import { MdOutlineQrCodeScanner } from "react-icons/md";
 import { BsQrCodeScan } from "react-icons/bs";
 import { GrClose } from "react-icons/gr";
 import { HiOutlineAtSymbol } from "react-icons/hi2";
+import Swal from "sweetalert2";
 
 export default function AssetScanner() {
     const scannerRef = useRef(null);
