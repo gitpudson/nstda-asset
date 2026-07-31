@@ -33,6 +33,27 @@ export default function AssetRequestMobile({ qrcode }) {
 //   const [location,setLocation] = useState({});
 //   const [saving, setSaving] = useState(false);
 
+  //ดึง Building
+  const buildings = Object.keys(location);
+  console.log(buildings);
+
+  //ดึง Floor เมื่อเลือก Building
+  const getFloors = (building) => {
+    return Object.keys(
+        location[building] || {}
+    );
+  };
+
+  //ดึง Room เมื่อเลือก Floor
+  const getRooms = (building, floor) => {
+    return location[building]?.[floor] || [];
+  };
+
+  
+  const [building, setBuilding] = useState("");
+  const [floor, setFloor] = useState("");
+  const [room, setRoom] = useState({});
+
   const [formData, setFormData] = useState({
     org_owner: "",
     asset_code: "",
@@ -492,45 +513,6 @@ useEffect(() => {
           value={formData.asset_code}
         />
 
-        {/* <Typography className="label">
-          สถานะ
-        </Typography> */}
-
-        {/* <TextField
-          select
-          fullWidth
-          size="small"
-          name="asset_status"
-          value={formData.asset_status}
-          onChange={handleChange}
-        >
-          <MenuItem value="ใช้งานปกติ">
-            ใช้งานปกติ
-          </MenuItem>
-
-          <MenuItem value="ชำรุด">
-            ชำรุด
-          </MenuItem>
-        </TextField> */}
-
-        {/* <TextField
-            select
-            fullWidth
-            size="small"
-            name="asset_status"
-            value={formData.asset_status || ""}
-            onChange={handleChange}
-            >
-            {statusList.map((status) => (
-                <MenuItem
-                key={status}
-                value={status}
-                >
-                {status}
-                </MenuItem>
-            ))}
-        </TextField> */}
-
         <Typography className="label">
           รายการครุภัณฑ์
         </Typography>
@@ -540,9 +522,6 @@ useEffect(() => {
             {formData.asset_name}
           </Typography>
 
-          {/* <Typography variant="body2">
-            ของห้องปฏิบัติการใช้สัตว์เพื่องานทางวิทยาศาสตร์
-          </Typography> */}
         </Box>
 
         <Typography className="label">
@@ -550,73 +529,24 @@ useEffect(() => {
         </Typography>
 
         {/* <TextField
-          select
-          fullWidth
-          size="small"
-          name="building"
-          value={formData.building}
-          onChange={handleChange}
-          InputProps={{
-            startAdornment: (
-              <ApartmentIcon
-                sx={{
-                  mr: 1,
-                  color: "#ff6b00",
-                }}
-              />
-            ),
-          }}
-        >
-          <MenuItem value="NECTEC">
-            NECTEC
-          </MenuItem>
-        </TextField> */}
+        select
+        fullWidth
+        size="small"
+        name="new_building"
+        value={formData.new_building || ""}
+        onChange={(e) => {
+          handleChange(e);
 
-        {/* <TextField
-            select
-            fullWidth
-            size="small"
-            name="new_building"
-            value={formData.new_building || ""}
-            onChange={(e) => {
-            handleChange(e);
-
-            // Reset ชั้นและห้องเมื่อเปลี่ยนอาคาร
-            setFormData(prev => ({
+          setFormData((prev) => ({
             ...prev,
             new_building: e.target.value,
             new_floor: "",
             new_room: "",
-            }));
-            }}
-            >
-            {location.Building.map((building) => (
-            <MenuItem
-            key={building}
-            value={building}
-            >
-            {building}
-            </MenuItem>
-            ))}
-        </TextField> */}
+          }));
+        }}
+      >
 
-        <TextField
-  select
-  fullWidth
-  size="small"
-  name="new_building"
-  value={formData.new_building || ""}
-  onChange={(e) => {
-    handleChange(e);
-
-    setFormData((prev) => ({
-      ...prev,
-      new_building: e.target.value,
-      new_floor: "",
-      new_room: "",
-    }));
-  }}
->
+        
   {(location?.Building || []).map((building) => (
     <MenuItem
       key={building}
@@ -625,13 +555,33 @@ useEffect(() => {
       {building}
     </MenuItem>
   ))}
-</TextField>
+        </TextField> */}
+
+        <TextField
+          select
+          fullWidth
+          // label="อาคาร"
+          value={building}
+          onChange={(e) => {
+          setBuilding(e.target.value);
+          setFloor("");
+          }}
+          >
+          {Object.keys(location).map((item) => (
+          <MenuItem
+          key={item}
+          value={item}
+          >
+          {item}
+          </MenuItem>
+          ))}
+        </TextField>
 
         <Typography className="label">
           ชั้น
         </Typography>
 
-        <TextField
+        {/* <TextField
             select
             fullWidth
             size="small"
@@ -654,13 +604,32 @@ useEffect(() => {
             {item.Floor}
             </MenuItem>
             ))}
-        </TextField>
+        </TextField> */}
+        <TextField
+          select
+          fullWidth
+          // label="ชั้น"
+          value={floor}
+          onChange={(e) => setFloor(e.target.value)}
+          disabled={!building}
+        >
+          {Object.keys(location[building] || {}).map((item) => (
+            <MenuItem
+              key={item}
+              value={item}
+            >
+              {item === "_NO_FLOOR"
+                ? "ไม่ระบุชั้น"
+                : item}
+            </MenuItem>
+          ))}
+      </TextField>
 
         <Typography className="label">
           ห้อง
         </Typography>
 
-        <TextField
+        {/* <TextField
             select
             fullWidth
             size="small"
@@ -677,7 +646,25 @@ useEffect(() => {
             {item.Room}
             </MenuItem>
             ))}
-        </TextField>
+        </TextField> */}
+
+        <TextField
+          select
+          fullWidth
+          // label="ห้อง"
+          value={room}
+          onChange={(e) => setRoom(e.target.value)}
+          disabled={!floor}
+        >
+          {(location[building]?.[floor] || []).map((item) => (
+            <MenuItem
+              key={item}
+              value={item}
+            >
+              {item}
+            </MenuItem>
+          ))}
+      </TextField>
 
         <Typography className="label">
           สถานะ

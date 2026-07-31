@@ -42,10 +42,10 @@ const AppContextProvider = (props) => {
 
     }
 
-    const fetLocation = async (org) => {
+    const fetLocation1 = async (org) => {
         console.log("fetLocation");
         const post = {
-            function: 'getLocation',
+            function: 'getLocationNew',
             payload: {
                 "org": org
             }
@@ -69,7 +69,53 @@ const AppContextProvider = (props) => {
 
     }
 
-    const fetAssetByAssetCode = async (qrcode) => {
+    const fetLocation = async (org) => {
+
+    try {
+
+        console.log("fetLocation");
+
+        const post = {
+            function: 'getLocationNew',
+            payload: {
+                org
+            }
+        };
+
+        const response = await axios.post(
+            url_api_backend,
+            post,
+            {
+                headers: {
+                    'Content-Type': 'text/plain'
+                }
+            }
+        );
+
+        if (response.data.success) {
+
+            setLocation(response.data.data);
+
+            console.log(response.data.data);
+
+            console.log(
+                Object.keys(response.data.data)
+            );
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            'Load Location Error:',
+            error
+        );
+
+    }
+
+};
+
+    const fetAssetByAssetCode1 = async (qrcode) => {
         console.log(qrcode);
         
         const post = {
@@ -85,13 +131,13 @@ const AppContextProvider = (props) => {
                 headers: {
                     'Content-Type': 'text/plain',
                 },
-                mode: "no-cors"
+                // mode: "no-cors"
             }
         )
 
         if (response.data.success) {
             console.log(response.data.data.org_owner);
-            fetLocation(response.data.data.org_owner);
+            await fetLocation(response.data.data.org_owner);
             setIsLoading(false);            
             return response.data.data;
             
@@ -99,6 +145,57 @@ const AppContextProvider = (props) => {
         }
 
     }
+
+    const fetAssetByAssetCode = async (qrcode) => {
+
+    try {
+
+        console.log(qrcode);
+
+        const post = {
+            function: 'getAssetByAssetCode',
+            payload: {
+                asset_code: qrcode
+            }
+        };
+
+        setIsLoading(true);
+
+        const response = await axios.post(
+            url_api_backend,
+            post,
+            {
+                headers: {
+                    'Content-Type': 'text/plain'
+                }
+            }
+        );
+
+        if (response.data.success) {
+
+            const assetData = response.data.data;
+
+            // console.log(assetData.org_owner);
+
+            await fetLocation(assetData.org_owner);
+
+            return assetData;
+        }
+
+    } catch (error) {
+
+        console.error(
+            'Load Asset Error:',
+            error
+        );
+
+    } finally {
+
+        setIsLoading(false);
+
+    }
+
+};
 
     const fetStatus = async () => {
       
@@ -156,10 +253,9 @@ const AppContextProvider = (props) => {
 
 
     useEffect(() => {
-        // fetAllBuilding();  
-        // fetLocation("ศล.");  
-       
-    },[])
+        console.log("location");
+        console.log(location);
+    }, [location]);
 
 
 
