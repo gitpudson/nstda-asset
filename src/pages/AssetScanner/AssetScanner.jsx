@@ -203,12 +203,12 @@ export default function AssetScanner() {
                         //     return;
                         // }
 
-                        const parts = decodedText.trim().split("-");
+                        const qrText = decodedText.trim().split("-");
                         const isValid =
                                         /^\d{4}-\d{3}-\d{4}-\d+$/.test(qrText) ||
                                         /^\d{4}-\d{3}-\d{4}-\d+-\d+$/.test(qrText) ||
                                         /^[A-Z]+-[A-Z]\d{4}-\d{3}-\d{4}-\d+$/.test(qrText);
-                                        
+
                         if (!isValid) {
                             await stopScanner();
                             await Swal.fire({
