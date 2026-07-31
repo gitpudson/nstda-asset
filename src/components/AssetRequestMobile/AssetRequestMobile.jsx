@@ -669,13 +669,30 @@ useEffect(() => {
           }))
         }
       >
-        {Object.keys(
+        {/* {Object.keys(
           location[formData.new_building] || {}
         ).map(item => (
           <MenuItem key={item} value={item}>
             {item}
           </MenuItem>
+        ))} */}
+
+        {Object.keys(location[formData.new_building] || {})
+        .sort((a, b) => {
+          if (a === "ไม่มีชั้น") return -1;
+          if (b === "ไม่มีชั้น") return 1;
+
+          return a.localeCompare(b, "en", {
+            numeric: true,
+            sensitivity: "base"
+          });
+        })
+        .map(item => (
+          <MenuItem key={item} value={item}>
+            {item}
+          </MenuItem>
         ))}
+
       </TextField>
 
         <Typography className="label">
