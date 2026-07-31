@@ -204,8 +204,11 @@ export default function AssetScanner() {
                         // }
 
                         const parts = decodedText.trim().split("-");
-                        const isValid =(parts.length === 4 || parts.length === 5) &&
-                                        parts.every(part => /^\d+$/.test(part));
+                        const isValid =
+                                        /^\d{4}-\d{3}-\d{4}-\d+$/.test(qrText) ||
+                                        /^\d{4}-\d{3}-\d{4}-\d+-\d+$/.test(qrText) ||
+                                        /^[A-Z]+-[A-Z]\d{4}-\d{3}-\d{4}-\d+$/.test(qrText);
+                                        
                         if (!isValid) {
                             await stopScanner();
                             await Swal.fire({
