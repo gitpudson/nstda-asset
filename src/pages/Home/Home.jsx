@@ -88,9 +88,9 @@ const Home = () => {
        {/* <ShowForm  qrcode =  "1201-001-0001-0000011-000" /> */}
 
 
-       {/* <AssetRequestMobile qrcode =  "1200-001-0001-000000037"/> */}
+       <AssetRequestMobile qrcode =  "1200-001-0001-000000037"/>
 
-        {showForm && ( <AssetRequestMobile  qrcode =  {barcode} />)}
+        {/* {showForm && ( <AssetRequestMobile  qrcode =  {barcode} />)} */}
 
       </div>
 
