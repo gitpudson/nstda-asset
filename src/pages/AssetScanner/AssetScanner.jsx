@@ -326,7 +326,7 @@ export default function AssetScanner() {
 
                                     <div className="scanner-frame" >
                                         <div className="qr-box">
-                                            <img className="qr-image" src={assets.qrcode6} alt=""   onClick={startScanner}/>
+                                            <img className="qr-image" src={assets.qrcode} alt=""   onClick={startScanner}/>
 
                                             <div className="scan-line"></div>
                                         </div>

@@ -100,7 +100,7 @@ export default function Home2() {
 
                             <div className="qr-frame">
                                 <img
-                                    src={assets.qrcode2}
+                                    src={assets.qrcode7}
                                     alt="OBEC"
                                     className="hero-logo" />
                             </div>
