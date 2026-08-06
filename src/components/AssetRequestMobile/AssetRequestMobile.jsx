@@ -1,4 +1,4 @@
-import { useState ,useContext,useEffect} from "react";
+import { useState, useContext, useEffect } from "react";
 import {
   Box,
   Card,
@@ -24,14 +24,14 @@ import Swal from "sweetalert2";
 
 export default function AssetRequestMobile({ qrcode }) {
 
-  const { url_api_backend, fetAssetByAssetCode ,fetStatus,isLoading,SaveData,isSaving,location} = useContext(AppContext);
+  const { url_api_backend, fetAssetByAssetCode, fetStatus, isLoading, SaveData, isSaving, location } = useContext(AppContext);
 
   const [images, setImages] = useState([]);
-  const [imgPerson,setImgPerson] = useState();
-  const [data,setData] = useState({});
-  const [statusList,setStatusList] = useState([]);
-//   const [location,setLocation] = useState({});
-//   const [saving, setSaving] = useState(false);
+  const [imgPerson, setImgPerson] = useState();
+  const [data, setData] = useState({});
+  const [statusList, setStatusList] = useState([]);
+  //   const [location,setLocation] = useState({});
+  //   const [saving, setSaving] = useState(false);
 
   //ดึง Building
   const buildings = Object.keys(location);
@@ -40,7 +40,7 @@ export default function AssetRequestMobile({ qrcode }) {
   //ดึง Floor เมื่อเลือก Building
   const getFloors = (building) => {
     return Object.keys(
-        location[building] || {}
+      location[building] || {}
     );
   };
 
@@ -49,7 +49,7 @@ export default function AssetRequestMobile({ qrcode }) {
     return location[building]?.[floor] || [];
   };
 
-  
+
   const [building, setBuilding] = useState("");
   const [floor, setFloor] = useState("");
   const [room, setRoom] = useState({});
@@ -75,7 +75,7 @@ export default function AssetRequestMobile({ qrcode }) {
     row_number: 0
   });
 
-//   const [formData, setFormData] = useState({});
+  //   const [formData, setFormData] = useState({});
 
   const handleChange = (e) => {
     setFormData({
@@ -97,106 +97,106 @@ export default function AssetRequestMobile({ qrcode }) {
   };
 
   const handleImage = (e) => {
-  const file = e.target.files?.[0];
+    const file = e.target.files?.[0];
 
-  if (!file) return;
+    if (!file) return;
 
-  setImages([
-    {
-      file,
-      preview: URL.createObjectURL(file),
-      isOld: false,
-    },
-  ]);
-};
+    setImages([
+      {
+        file,
+        preview: URL.createObjectURL(file),
+        isOld: false,
+      },
+    ]);
+  };
 
-const formatDate = (dateString) => {
+  const formatDate = (dateString) => {
     return new Date(dateString).toLocaleString("th-TH", {
-    timeZone: "Asia/Bangkok",
+      timeZone: "Asia/Bangkok",
     });
-};
+  };
 
   //แปลงรูปเป็น Base64 ก่อน
   const fileToBase64 = (file) => {
     return new Promise((resolve, reject) => {
-        const reader = new FileReader();
+      const reader = new FileReader();
 
-        reader.onload = () => {
+      reader.onload = () => {
         const base64 = reader.result.split(",")[1];
 
         resolve(
-            `${file.name}||${file.type}||${base64}`
+          `${file.name}||${file.type}||${base64}`
         );
-        };
+      };
 
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
     });
-};
-
-//   const handleSave = async () => {
-
-//     const payload = new FormData();
-
-//     payload.append("function", "updateAsset");
-//     payload.append("function", "updateAsset");
-
-//     // ข้อมูลทั่วไป
-//     Object.keys(formData).forEach((key) => {
-//         payload.append(key, formData[key]);
-//     });
-
-//     // รูปภาพ
-//     images.forEach((img) => {
-//         payload.append("images", img.file);
-//     });
-
-//     //   await axios.post("/api/assets", payload, {
-//     //     headers: {
-//     //       "Content-Type": "multipart/form-data",
-//     //     },
-//     //   });
-
-//     console.log(payload);
-
-//     for (let pair of payload.entries()) {
-//     console.log(pair[0], pair[1]);
-//     }
-
-// };
-
-const handleSave1 = async () => {
-  const imageData = await Promise.all(
-    images.map((img) => fileToBase64(img.file))
-  );
-
-  const data = {
-    function: "updateAsset",
-    payload: {
-      ...formData,
-      image: imageData,
-    },
   };
 
-        console.log(data);
+  //   const handleSave = async () => {
 
-        // await axios.post(API_URL, data);
-        const response = await axios.post(`${url_api_backend}`, data,
-            {
-                headers: {
-                    'Content-Type': 'text/plain',
-                },
-                mode: "no-cors"
-            }
-        )
+  //     const payload = new FormData();
+
+  //     payload.append("function", "updateAsset");
+  //     payload.append("function", "updateAsset");
+
+  //     // ข้อมูลทั่วไป
+  //     Object.keys(formData).forEach((key) => {
+  //         payload.append(key, formData[key]);
+  //     });
+
+  //     // รูปภาพ
+  //     images.forEach((img) => {
+  //         payload.append("images", img.file);
+  //     });
+
+  //     //   await axios.post("/api/assets", payload, {
+  //     //     headers: {
+  //     //       "Content-Type": "multipart/form-data",
+  //     //     },
+  //     //   });
+
+  //     console.log(payload);
+
+  //     for (let pair of payload.entries()) {
+  //     console.log(pair[0], pair[1]);
+  //     }
+
+  // };
+
+  const handleSave1 = async () => {
+    const imageData = await Promise.all(
+      images.map((img) => fileToBase64(img.file))
+    );
+
+    const data = {
+      function: "updateAsset",
+      payload: {
+        ...formData,
+        image: imageData,
+      },
+    };
+
+    console.log(data);
+
+    // await axios.post(API_URL, data);
+    const response = await axios.post(`${url_api_backend}`, data,
+      {
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+        mode: "no-cors"
+      }
+    )
 
 
-        if (response) {
-            console.log("Success");
-        }
-};
+    if (response) {
+      console.log("Success");
+    }
+  };
 
-const handleSave2 = async () => {
+  const handleSave2 = async () => {
 
     // ตรวจสอบว่ามีรูปหรือไม่
     // if (images.length === 0) {
@@ -205,330 +205,402 @@ const handleSave2 = async () => {
     // return;
     // }
     if (!images || images.length === 0) {
-        Swal.fire({
-            icon: "warning",
-            title: "ไม่พบรูปภาพ",
-            // text: "กรุณาถ่ายรูปหรือแนบรูปภาพอย่างน้อย 1 รูป",
-            text: "กรุณาถ่ายรูปหรือแนบรูปภาพก่อน",
-            confirmButtonText: "ตกลง",
-        });
-        return;
+      Swal.fire({
+        icon: "warning",
+        title: "ไม่พบรูปภาพ",
+        // text: "กรุณาถ่ายรูปหรือแนบรูปภาพอย่างน้อย 1 รูป",
+        text: "กรุณาถ่ายรูปหรือแนบรูปภาพก่อน",
+        confirmButtonText: "ตกลง",
+      });
+      return;
     }
 
     try {
-        // setSaving(true);
+      // setSaving(true);
 
-        const imageData = await Promise.all(
-            images.map((img) => fileToBase64(img.file))
-        );
+      const imageData = await Promise.all(
+        images.map((img) => fileToBase64(img.file))
+      );
 
-        const data = {
-            function: "updateAsset",
-            payload: {
-            ...formData,
-            image: imageData,
-            },
-        };
+      const data = {
+        function: "updateAsset",
+        payload: {
+          ...formData,
+          image: imageData,
+        },
+      };
 
-        SaveData(data);
-        // alert("บันทึกสำเร็จ");
+      SaveData(data);
+      // alert("บันทึกสำเร็จ");
 
     } catch (error) {
-        console.error(error);
-        Swal.fire({
-            icon: "error",
-            title: "เกิดข้อผิดพลาด",
-            text: "ไม่สามารถบันทึกข้อมูลได้",
-            });
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "เกิดข้อผิดพลาด",
+        text: "ไม่สามารถบันทึกข้อมูลได้",
+      });
     } finally {
-        // setSaving(false);
+      // setSaving(false);
     }
-        
-};
 
-const handleSave3 = async () => {
+  };
+
+  const handleSave3 = async () => {
 
     if (!images || images.length === 0) {
-        Swal.fire({
-            icon: "warning",
-            title: "ไม่พบรูปภาพ",
-            // text: "กรุณาถ่ายรูปหรือแนบรูปภาพอย่างน้อย 1 รูป",
-            text: "กรุณาถ่ายรูปหรือแนบรูปภาพก่อน",
-            confirmButtonText: "ตกลง",
-        });
-        return;
+      Swal.fire({
+        icon: "warning",
+        title: "ไม่พบรูปภาพ",
+        // text: "กรุณาถ่ายรูปหรือแนบรูปภาพอย่างน้อย 1 รูป",
+        text: "กรุณาถ่ายรูปหรือแนบรูปภาพก่อน",
+        confirmButtonText: "ตกลง",
+      });
+      return;
     }
 
     try {
 
-        let imageData = [];
+      let imageData = [];
 
-        const newImages = images.filter((img) => img.file);
+      const newImages = images.filter((img) => img.file);
 
-        if (newImages.length > 0) {
+      if (newImages.length > 0) {
         imageData = await Promise.all(
-            newImages.map((img) => fileToBase64(img.file))
+          newImages.map((img) => fileToBase64(img.file))
         );
-        }
+      }
 
-        const data = {
-            function: "updateAsset",
-            payload: {
-            ...formData,
-            image: imageData,
-            },
-        };
+      const data = {
+        function: "updateAsset",
+        payload: {
+          ...formData,
+          image: imageData,
+        },
+      };
 
-        SaveData(data);
-        // alert("บันทึกสำเร็จ");
+      SaveData(data);
+      // alert("บันทึกสำเร็จ");
 
     } catch (error) {
-        console.error(error);
-        Swal.fire({
-            icon: "error",
-            title: "เกิดข้อผิดพลาด",
-            text: "ไม่สามารถบันทึกข้อมูลได้",
-            });
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "เกิดข้อผิดพลาด",
+        text: "ไม่สามารถบันทึกข้อมูลได้",
+      });
     } finally {
-        // setSaving(false);
+      // setSaving(false);
     }
-        
-};
 
-const handleSave = async () => {
+  };
+
+  const handleSave = async () => {
 
     if (!images || images.length === 0) {
-        Swal.fire({
-            icon: "warning",
-            title: "ไม่พบรูปภาพ",
-            // text: "กรุณาถ่ายรูปหรือแนบรูปภาพอย่างน้อย 1 รูป",
-            text: "กรุณาถ่ายรูปหรือแนบรูปภาพก่อน",
-            confirmButtonText: "ตกลง",
-        });
-        return;
+      Swal.fire({
+        icon: "warning",
+        title: "ไม่พบรูปภาพ",
+        // text: "กรุณาถ่ายรูปหรือแนบรูปภาพอย่างน้อย 1 รูป",
+        text: "กรุณาถ่ายรูปหรือแนบรูปภาพก่อน",
+        confirmButtonText: "ตกลง",
+      });
+      return;
     }
 
     const result = await Swal.fire({
-        title: "ยืนยันการบันทึก?",
-        text: "ต้องการบันทึกข้อมูลนี้หรือไม่",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonText: "บันทึก",
-        cancelButtonText: "ยกเลิก",
-        reverseButtons: true,
+      title: "ยืนยันการบันทึก?",
+      text: "ต้องการบันทึกข้อมูลนี้หรือไม่",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "บันทึก",
+      cancelButtonText: "ยกเลิก",
+      reverseButtons: true,
     });
 
     if (!result.isConfirmed) return;
 
     try {
 
-        let imageData = [];
-        const newImages = images.filter((img) => img.file);
+      let imageData = [];
+      const newImages = images.filter((img) => img.file);
 
-        // แปลงเป็น Base64 เฉพาะรูปใหม่
-        if (newImages.length > 0) {
-            imageData = await Promise.all(
-            newImages.map((img) => fileToBase64(img.file))
-            );
-        }
+      // แปลงเป็น Base64 เฉพาะรูปใหม่
+      if (newImages.length > 0) {
+        imageData = await Promise.all(
+          newImages.map((img) => fileToBase64(img.file))
+        );
+      }
 
-        const data = {
-            function: "updateAsset",
-            payload: {
-                ...formData,
-                // ส่ง image เฉพาะกรณีมีรูปใหม่
-                ...(imageData.length > 0 && {
-                image: imageData,
-                }),
-            },
-        };
+      const data = {
+        function: "updateAsset",
+        payload: {
+          ...formData,
+          // ส่ง image เฉพาะกรณีมีรูปใหม่
+          ...(imageData.length > 0 && {
+            image: imageData,
+          }),
+        },
+      };
 
-        SaveData(data);
-        // alert("บันทึกสำเร็จ");
+      SaveData(data);
+      // alert("บันทึกสำเร็จ");
 
     } catch (error) {
-        console.error(error);
-        Swal.fire({
-            icon: "error",
-            title: "เกิดข้อผิดพลาด",
-            text: "ไม่สามารถบันทึกข้อมูลได้",
-            });
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "เกิดข้อผิดพลาด",
+        text: "ไม่สามารถบันทึกข้อมูลได้",
+      });
     } finally {
-        // setSaving(false);
+      // setSaving(false);
     }
-        
-};
 
-// const filteredFloors = location.Floor.filter(
-// item => item.Building === formData.new_building
-// );
+  };
 
-// const filteredRooms = location.Room.filter(
-// item => item.Floor === formData.new_floor
-// );
+  // const filteredFloors = location.Floor.filter(
+  // item => item.Building === formData.new_building
+  // );
 
-const filteredFloors = location?.Floor?.filter(
-  item => item.Building === formData.new_building
-) || [];
+  // const filteredRooms = location.Room.filter(
+  // item => item.Floor === formData.new_floor
+  // );
 
-const filteredRooms = location?.Room?.filter(
-  item => item.Floor === formData.new_floor
-) || [];
+  const filteredFloors = location?.Floor?.filter(
+    item => item.Building === formData.new_building
+  ) || [];
+
+  const filteredRooms = location?.Room?.filter(
+    item => item.Floor === formData.new_floor
+  ) || [];
 
 
-useEffect(() => {
-      const loadData = async () => {         
-  
-          const asset = await fetAssetByAssetCode(qrcode);
-  
-          console.log(asset);
-        //   setData(asset);
-          setFormData(asset);
-          setImgPerson(`https://i.nstda.or.th/lib/search/cache/large/${asset.person_key}.jpg`);
+  useEffect(() => {
+    const loadData = async () => {
 
-        // setImages([
-        // {
-        //     preview: asset.image_url,
-        //     isOld: true,
-        // },
-        // ]);
+      const asset = await fetAssetByAssetCode(qrcode);
 
-        const apiImages = asset.image_url
-                            ? [
-                                {
-                                    preview: asset.image_url,
-                                    isOld: true,
-                                },
-                                ]
-                            : [];
+      console.log(asset);
+      setFormData(asset);
+      setImgPerson(`https://i.nstda.or.th/lib/search/cache/large/${asset.person_key}.jpg`);
 
-        setImages(apiImages);
+
+      const apiImages = asset.image_url
+        ? [
+          {
+            preview: asset.image_url,
+            isOld: true,
+          },
+        ]
+        : [];
+
+      setImages(apiImages);
 
     };
-          
-          
-      
-  
-      // setIsLoading(true);
-      loadData();
-      // setIsLoading(false);
-  
+
+
+
+
+    // setIsLoading(true);
+    // loadData();
+    // setIsLoading(false);
+
   }, []);
 
   useEffect(() => {
-      const loadData = async () => {         
-  
-          const status = await fetStatus();  
-          setStatusList(status);
-        //   console.log("statusList =", statusList);     
-                  
-      };
-  
-      loadData();   
-  
+
+    const loadData = async () => {
+
+      try {
+
+        const asset = await fetAssetByAssetCode(qrcode);
+
+        console.log(asset);
+
+        // กรณี API Error หรือไม่พบข้อมูล
+        // if (!asset || !asset.success) {
+
+        //   await Swal.fire({
+        //     icon: "warning",
+        //     title: "ไม่พบรายการครุภัณฑ์",
+        //     text: "กรุณาตรวจสอบ QR Code แล้วทำรายการใหม่",
+        //     showConfirmButton: false
+        //   });
+
+        //   return;
+        // }
+
+        if (!asset || !asset.success) {
+
+          await Swal.fire({
+            icon: "warning",
+            title: "ไม่พบรายการครุภัณฑ์",
+            text: "กรุณาตรวจสอบ QR Code แล้วทำรายการใหม่",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true
+          });
+
+          window.location.reload();
+
+          return;
+        }
+
+        setFormData(asset);
+
+        setImgPerson(
+          `https://i.nstda.or.th/lib/search/cache/large/${asset.person_key}.jpg`
+        );
+
+        const apiImages = asset.image_url
+          ? [
+            {
+              preview: asset.image_url,
+              isOld: true,
+            },
+          ]
+          : [];
+
+        setImages(apiImages);
+
+      } catch (error) {
+
+        console.error(error);
+
+        Swal.fire({
+          icon: "error",
+          title: "เกิดข้อผิดพลาด",
+          text: "ไม่สามารถดึงข้อมูลครุภัณฑ์ได้",
+          confirmButtonText: "ตกลง",
+        });
+
+      }
+
+    };
+
+    if (qrcode) {
+      loadData();
+    }
+
+  }, [qrcode]);
+
+  useEffect(() => {
+    const loadData = async () => {
+
+      const status = await fetStatus();
+      setStatusList(status);
+      //   console.log("statusList =", statusList);     
+
+    };
+
+    loadData();
+
   }, [statusList]);
 
 
-  return (    
+  return (
     <>
-    {(isLoading) && <center> 
-            <div>
-                <Typography variant="h6" fontWeight={500}>
-                   กำลังค้นหาหมายเลขครุภัณฑ์
-                </Typography>
-                <Typography variant="h6" fontWeight={500} className="label-asset">
-                   { qrcode }
-                </Typography>
-                <Typography variant="h6" fontWeight={500}>
-                   กรุณารอสักครู่.....
-                </Typography>
-                <img className='loading' src="./spinner.svg" alt="" />
-            </div> 
-        </center>}
-    {/* {(isLoading  || isSaving) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>} */}
-
-    {(!isLoading) && (
-
-    <Box className="page">
-
-    {/* Header */}
-    <Box className="header-box">
-    <IconButton>
-        {/* <ArrowBackIcon /> */}
-        <img className="logo-org" src={formData.org_owner === "สก." ? assets.co :
-                               formData.org_owner === "ศอ." ? assets.nectec :
-                               formData.org_owner === "ศช." ? assets.biotec :
-                               formData.org_owner === "ศว." ? assets.mtec :
-                               formData.org_owner === "ศล." ? assets.entec :
-                               formData.org_owner === "ศน." ? assets.nanotec : ""
-
-    } /> 
-    </IconButton>
-
-    <Typography variant="h6" fontWeight={300}>
-        รายการผู้ถือครองครุภัณฑ์
-    </Typography>
-    
- 
-       
-
-      </Box>
-          
-      {/* Employee */}
-      <Card className="employee-card">
-        <Avatar
-          src={imgPerson}
-          sx={{
-            width: 75,
-            height: 75,
-            bgcolor: "#ff6b00",
-          }}
-        />
-
-        <Box>
-          <Typography fontWeight={700}>
-            {formData.person_name}
+      {(isLoading) && <center>
+        <div>
+          <Typography variant="h6" fontWeight={500}>
+            กำลังค้นหาหมายเลขครุภัณฑ์
           </Typography>
-
-          <Typography color="text.secondary">
-            รหัสพนักงาน {formData.person_key}
+          <Typography variant="h6" fontWeight={500} className="label-asset">
+            {qrcode}
           </Typography>
-
-          <Typography color="text.secondary">
-            หน่วยงาน {formData.org_owner}
+          <Typography variant="h6" fontWeight={500}>
+            กรุณารอสักครู่.....
           </Typography>
-        </Box>
-      </Card>
+          <img className='loading' src="./spinner.svg" alt="" />
+        </div>
+      </center>}
+      {/* {(isLoading  || isSaving) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>} */}
 
-      {/* Form */}
-      <Card className="form-card">
 
-        <Typography className="label">
-          รหัสครุภัณฑ์
-        </Typography>
 
-        <TextField
-          fullWidth
-          size="small"
-          value={formData.asset_code}
-        />
+      {(!isLoading && formData.org_owner != "") && (
 
-        <Typography className="label">
-          รายการครุภัณฑ์
-        </Typography>
+        <Box className="page">
 
-        <Box className="asset-box">
-          <Typography fontWeight={700}>
-            {formData.asset_name}
-          </Typography>
+          {/* Header */}
+          <Box className="header-box">
+            <IconButton>
+              {/* <ArrowBackIcon /> */}
+              <img className="logo-org" src={formData.org_owner === "สก." ? assets.co :
+                formData.org_owner === "ศอ." ? assets.nectec :
+                  formData.org_owner === "ศช." ? assets.biotec :
+                    formData.org_owner === "ศว." ? assets.mtec :
+                      formData.org_owner === "ศล." ? assets.entec :
+                        formData.org_owner === "ศน." ? assets.nanotec : ""
 
-        </Box>
+              } />
+            </IconButton>
 
-        <Typography className="label">
-          อาคาร
-        </Typography>
+            <Typography variant="h6" fontWeight={300}>
+              รายการผู้ถือครองครุภัณฑ์
+            </Typography>
 
-        {/* <TextField
+
+
+
+          </Box>
+
+          {/* Employee */}
+          <Card className="employee-card">
+            <Avatar
+              src={imgPerson}
+              sx={{
+                width: 75,
+                height: 75,
+                bgcolor: "#ff6b00",
+              }}
+            />
+
+            <Box>
+              <Typography fontWeight={700}>
+                {formData.person_name}
+              </Typography>
+
+              <Typography color="text.secondary">
+                รหัสพนักงาน {formData.person_key}
+              </Typography>
+
+              <Typography color="text.secondary">
+                หน่วยงาน {formData.org_owner}
+              </Typography>
+            </Box>
+          </Card>
+
+          {/* Form */}
+          <Card className="form-card">
+
+            <Typography className="label">
+              รหัสครุภัณฑ์
+            </Typography>
+
+            <TextField
+              fullWidth
+              size="small"
+              value={formData.asset_code}
+            />
+
+            <Typography className="label">
+              รายการครุภัณฑ์
+            </Typography>
+
+            <Box className="asset-box">
+              <Typography fontWeight={700}>
+                {formData.asset_name}
+              </Typography>
+
+            </Box>
+
+            <Typography className="label">
+              อาคาร
+            </Typography>
+
+            {/* <TextField
         select
         fullWidth
         size="small"
@@ -557,7 +629,7 @@ useEffect(() => {
   ))}
         </TextField> */}
 
-        {/* <TextField
+            {/* <TextField
           select
           fullWidth
           // label="อาคาร"
@@ -576,44 +648,44 @@ useEffect(() => {
           </MenuItem>
           ))}
         </TextField> */}
-        <TextField
-        select
-        fullWidth
-        // label="Building"
-        value={formData.new_building}
-        onChange={(e) =>
-          setFormData(prev => ({
-            ...prev,
-            new_building: e.target.value,
-            new_floor: "",
-            new_room: ""
-          }))
-        }
-      >
-        {/* {Object.keys(location).map(item => (
+            <TextField
+              select
+              fullWidth
+              // label="Building"
+              value={formData.new_building}
+              onChange={(e) =>
+                setFormData(prev => ({
+                  ...prev,
+                  new_building: e.target.value,
+                  new_floor: "",
+                  new_room: ""
+                }))
+              }
+            >
+              {/* {Object.keys(location).map(item => (
           <MenuItem key={item} value={item}>
             {item}
           </MenuItem>
         ))} */}
-        {Object.keys(location)
-        .sort((a, b) =>
-          a.localeCompare(b, "en", {
-            numeric: true,
-            sensitivity: "base",
-          })
-        )
-        .map(item => (
-          <MenuItem key={item} value={item}>
-            {item}
-          </MenuItem>
-        ))}
-      </TextField>
+              {Object.keys(location)
+                .sort((a, b) =>
+                  a.localeCompare(b, "en", {
+                    numeric: true,
+                    sensitivity: "base",
+                  })
+                )
+                .map(item => (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                ))}
+            </TextField>
 
-        <Typography className="label">
-          ชั้น
-        </Typography>
+            <Typography className="label">
+              ชั้น
+            </Typography>
 
-        {/* <TextField
+            {/* <TextField
             select
             fullWidth
             size="small"
@@ -637,7 +709,7 @@ useEffect(() => {
             </MenuItem>
             ))}
         </TextField> */}
-        {/* <TextField
+            {/* <TextField
           select
           fullWidth
           // label="ชั้น"
@@ -656,20 +728,20 @@ useEffect(() => {
             </MenuItem>
           ))}
       </TextField> */}
-      <TextField
-        select
-        fullWidth
-        // label="Floor"
-        value={formData.new_floor}
-        onChange={(e) =>
-          setFormData(prev => ({
-            ...prev,
-            new_floor: e.target.value,
-            new_room: ""
-          }))
-        }
-      >
-        {/* {Object.keys(
+            <TextField
+              select
+              fullWidth
+              // label="Floor"
+              value={formData.new_floor}
+              onChange={(e) =>
+                setFormData(prev => ({
+                  ...prev,
+                  new_floor: e.target.value,
+                  new_room: ""
+                }))
+              }
+            >
+              {/* {Object.keys(
           location[formData.new_building] || {}
         ).map(item => (
           <MenuItem key={item} value={item}>
@@ -677,29 +749,29 @@ useEffect(() => {
           </MenuItem>
         ))} */}
 
-        {Object.keys(location[formData.new_building] || {})
-        .sort((a, b) => {
-          if (a === "ไม่มีชั้น") return -1;
-          if (b === "ไม่มีชั้น") return 1;
+              {Object.keys(location[formData.new_building] || {})
+                .sort((a, b) => {
+                  if (a === "ไม่มีชั้น") return -1;
+                  if (b === "ไม่มีชั้น") return 1;
 
-          return a.localeCompare(b, "en", {
-            numeric: true,
-            sensitivity: "base"
-          });
-        })
-        .map(item => (
-          <MenuItem key={item} value={item}>
-            {item}
-          </MenuItem>
-        ))}
+                  return a.localeCompare(b, "en", {
+                    numeric: true,
+                    sensitivity: "base"
+                  });
+                })
+                .map(item => (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                ))}
 
-      </TextField>
+            </TextField>
 
-        <Typography className="label">
-          ห้อง
-        </Typography>
+            <Typography className="label">
+              ห้อง
+            </Typography>
 
-        {/* <TextField
+            {/* <TextField
             select
             fullWidth
             size="small"
@@ -718,7 +790,7 @@ useEffect(() => {
             ))}
         </TextField> */}
 
-        {/* <TextField
+            {/* <TextField
           select
           fullWidth
           // label="ห้อง"
@@ -735,82 +807,82 @@ useEffect(() => {
             </MenuItem>
           ))}
       </TextField> */}
-      <TextField
-        select
-        fullWidth
-        // label="Room"
-        value={formData.new_room}
-        onChange={(e) =>
-          setFormData(prev => ({
-            ...prev,
-            new_room: e.target.value
-          }))
-        }
-      >
-        {(location[formData.new_building]?.[formData.new_floor] || [])
-          .map(item => (
-            <MenuItem key={item} value={item}>
-              {item}
-            </MenuItem>
-          ))}
-      </TextField>
-
-        <Typography className="label">
-          สถานะ
-        </Typography>
-
-        <TextField
-            select
-            fullWidth
-            size="small"
-            name="new_status"
-            value={formData.new_status || ""}
-            onChange={handleChange}
+            <TextField
+              select
+              fullWidth
+              // label="Room"
+              value={formData.new_room}
+              onChange={(e) =>
+                setFormData(prev => ({
+                  ...prev,
+                  new_room: e.target.value
+                }))
+              }
             >
-            {statusList.map((status) => (
+              {(location[formData.new_building]?.[formData.new_floor] || [])
+                .map(item => (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                ))}
+            </TextField>
+
+            <Typography className="label">
+              สถานะ
+            </Typography>
+
+            <TextField
+              select
+              fullWidth
+              size="small"
+              name="new_status"
+              value={formData.new_status || ""}
+              onChange={handleChange}
+            >
+              {statusList.map((status) => (
                 <MenuItem
-                key={status}
-                value={status}
+                  key={status}
+                  value={status}
                 >
-                {status}
+                  {status}
                 </MenuItem>
-            ))}
-        </TextField>
+              ))}
+            </TextField>
 
-        <Typography className="label">
-          รูปภาพ
-        </Typography>
+            <Typography className="label">
+              รูปภาพ
+            </Typography>
 
-        <label className="upload-box">
-          <CameraAltIcon
-            sx={{
-              fontSize: 40,
-              color: "#ff6b00",
-            }}
-          />
+            <label className="upload-box">
+              <CameraAltIcon
+                sx={{
+                  fontSize: 40,
+                  color: "#ff6b00",
+                }}
+              />
 
-          <Typography>
-            แตะเพื่อถ่ายรูป
-          </Typography>
+              <Typography>
+                แตะเพื่อถ่ายรูป
+              </Typography>
 
-          <Typography
-            variant="caption"
-            color="text.secondary"
-          >
-            {/* หรือเลือกจากแกลเลอรี่ */}
-          </Typography>
+              <Typography
+                variant="caption"
+                color="text.secondary"
+              >
+                {/* หรือเลือกจากแกลเลอรี่ */}
+              </Typography>
 
-          <input
-            type="file"
-            hidden
-            multiple
-            accept="image/*"
-            capture="environment"
-            onChange={handleImage}
-          />
-        </label>
+              <input
+                type="file"
+                hidden
+                multiple
+                accept="image/*"
+                capture="environment"
+                onChange={handleImage}
+              />
+            </label>
 
-        {/* <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+            {/* <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
             {images.map((img, index) => (
                 <img
                 key={index}
@@ -826,58 +898,58 @@ useEffect(() => {
             ))}
         </Box> */}
 
-        {
-            formData.updated_at !== "" ?(
-                  <Typography className="label">
-                    แก้ไขล่าสุด {formatDate(formData.updated_at)}
-                  </Typography>
-            ) : ""
-        }
+            {
+              formData.updated_at !== "" ? (
+                <Typography className="label">
+                  แก้ไขล่าสุด {formatDate(formData.updated_at)}
+                </Typography>
+              ) : ""
+            }
 
-        <Box className="gallery">
-            {images
-            .filter((item) => item.preview)
-            .map((item, index) => (
-                <img
-                key={index}
-                src={item.preview}
-                // alt={`preview-${index}`}
-                alt=""
-                className="preview"
-                />
-            ))}
-        </Box>       
-      
-
-      </Card>
-
-      {/* {(isSaving) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>} */}
-    {/* {(isSaving) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>} */}
-
-       {/* Save */}
-      <Box className="footer">
-        <Button
-          fullWidth
-        //   startIcon={<SaveIcon />}
-          startIcon={isSaving ? <img className='loading-save' src="./spinner.svg" alt="" /> : <SaveIcon /> }
-          variant="contained"
-          onClick={handleSave}
-          className="save-btn"
-          disabled={isSaving}
-        >
-          {isSaving ? "Saving....." : "Save"}
-        </Button>
-      </Box>
+            <Box className="gallery">
+              {images
+                .filter((item) => item.preview)
+                .map((item, index) => (
+                  <img
+                    key={index}
+                    src={item.preview}
+                    // alt={`preview-${index}`}
+                    alt=""
+                    className="preview"
+                  />
+                ))}
+            </Box>
 
 
-    </Box>
+          </Card>
+
+          {/* {(isSaving) && <center> <div><img className='loading' src="./spinner.svg" alt="" /></div> </center>} */}
+          {/* {(isSaving) && <center> <div><img className='loading' src="./nstda-asset/spinner.svg" alt="" /></div> </center>} */}
+
+          {/* Save */}
+          <Box className="footer">
+            <Button
+              fullWidth
+              //   startIcon={<SaveIcon />}
+              startIcon={isSaving ? <img className='loading-save' src="./spinner.svg" alt="" /> : <SaveIcon />}
+              variant="contained"
+              onClick={handleSave}
+              className="save-btn"
+              disabled={isSaving}
+            >
+              {isSaving ? "Saving....." : "Save"}
+            </Button>
+          </Box>
 
 
-    )
+        </Box>
 
-    }
-    
-    </>    
+
+      )
+
+      }
+
+    </>
 
   );
 }
