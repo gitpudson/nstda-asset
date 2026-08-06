@@ -245,7 +245,7 @@ const AppContextProvider = (props) => {
                 icon: "success",
                 title: "บันทึกสำเร็จ",
                 text: "ข้อมูลถูกบันทึกเรียบร้อยแล้ว",
-                timer: 2000,
+                timer: 3000,
                 showConfirmButton: false,
                 timerProgressBar: true
             });
