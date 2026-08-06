@@ -134,6 +134,61 @@ export default function AssetRequestMobile({ qrcode }) {
     });
   };
 
+  //ฟังก์ชันย่อรูป
+  const compressImage = (
+    file,
+    maxWidth = 1024,
+    quality = 0.6
+  ) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      const img = new Image();
+
+      reader.onload = (e) => {
+        img.src = e.target.result;
+      };
+
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+
+        const scale = Math.min(
+          1,
+          maxWidth / img.width
+        );
+
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+
+        const ctx = canvas.getContext("2d");
+
+        ctx.drawImage(
+          img,
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+
+        const dataUrl = canvas.toDataURL(
+          "image/jpeg",
+          quality
+        );
+
+        const base64 = dataUrl.split(",")[1];
+
+        resolve(
+          `${file.name}||image/jpeg||${base64}`
+        );
+      };
+
+      img.onerror = reject;
+      reader.onerror = reject;
+
+      reader.readAsDataURL(file);
+    });
+  };
+
+
   //   const handleSave = async () => {
 
   //     const payload = new FormData();
@@ -327,8 +382,21 @@ export default function AssetRequestMobile({ qrcode }) {
 
       // แปลงเป็น Base64 เฉพาะรูปใหม่
       if (newImages.length > 0) {
+        // imageData = await Promise.all(
+        //   newImages.map((img) => fileToBase64(img.file))
+        // );
         imageData = await Promise.all(
-          newImages.map((img) => fileToBase64(img.file))
+          newImages.map((img) =>
+            compressImage(
+              img.file,
+
+              // 1280,  // หลังย่อ                        
+              // 0.7    // 200-500 KB
+
+              1024,  // หลังย่อ
+              0.6    // 100-300 KB
+            )
+          )
         );
       }
 
@@ -635,7 +703,7 @@ export default function AssetRequestMobile({ qrcode }) {
                 ห้อง : {formData?.room || "-"}
               </Typography>
             </Box>
-            
+
 
             <Typography className="label">
               อาคาร
