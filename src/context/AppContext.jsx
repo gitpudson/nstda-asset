@@ -153,7 +153,8 @@ const AppContextProvider = (props) => {
         console.log(qrcode);
 
         const post = {
-            function: 'getAssetByAssetCode',
+            // function: 'getAssetByAssetCode',
+            function: 'getAssetByAssetCode_New_Update',
             payload: {
                 asset_code: qrcode
             }
