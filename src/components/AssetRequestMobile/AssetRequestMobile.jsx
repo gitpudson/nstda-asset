@@ -576,7 +576,7 @@ export default function AssetRequestMobile({ qrcode }) {
           <Card className="form-card">
 
             <Typography className="label">
-              รหัสครุภัณฑ์xxxxx
+              รหัสครุภัณฑ์
             </Typography>
 
             <TextField

@@ -268,7 +268,7 @@ export default function AssetScanner() {
 
                             {/* <img className="logo" src={assets.co} alt="" /> */}
 
-                            <h1>ระบบตรวจสอบครุภัณฑ์</h1>
+                            <h1>ระบบตรวจสอบครุภัณฑ์ V.1</h1>
 
                             {/* <p className="subtitle">
                                 สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน
