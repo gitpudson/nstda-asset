@@ -674,7 +674,7 @@ export default function AssetRequestMobile({ qrcode }) {
               </Typography>
 
             </Box> */}
-            {/* {formData?.new_building === "" ?
+            {formData?.new_building === "" ?
               <Box className="asset-box">
               <Typography fontWeight={700}>
                 อาคาร : {formData?.build || "-"}
@@ -689,8 +689,8 @@ export default function AssetRequestMobile({ qrcode }) {
               </Typography>
             </Box>
             :<></>
-            } */}
-            <Box className="asset-box">
+            }
+            {/* <Box className="asset-box">
               <Typography fontWeight={700}>
                 อาคาร : {formData?.build || "-"}
               </Typography>
@@ -702,7 +702,7 @@ export default function AssetRequestMobile({ qrcode }) {
               <Typography fontWeight={700}>
                 ห้อง : {formData?.room || "-"}
               </Typography>
-            </Box>
+            </Box> */}
 
 
             <Typography className="label">
