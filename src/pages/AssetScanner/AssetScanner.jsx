@@ -396,8 +396,8 @@ export default function AssetScanner() {
                 </>
             )}
 
-            {/* {scanResult && (<AssetRequestMobile qrcode={scanResult} />)} */}
-            <AssetRequestMobile qrcode={"8900-001-0001-0007703-000"} />
+            {scanResult && (<AssetRequestMobile qrcode={scanResult} />)}
+            {/* <AssetRequestMobile qrcode={"1201-001-0001-000000139"} /> */}
         </>
 
     );
