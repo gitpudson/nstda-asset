@@ -597,6 +597,34 @@ export default function AssetRequestMobile({ qrcode }) {
             </Box>
 
             <Typography className="label">
+              ตำแหน่งที่ตั้งเดิมปัจจุบัน
+            </Typography>
+
+            {/* <Box className="asset-box">
+              <Typography fontWeight={700}>
+                {`อาคาร : ${formData?.build || "-"} ชั้น : ${formData?.floor || "-"} ห้อง : ${formData?.room || "-"} `}
+              </Typography>
+
+            </Box> */}
+            {formData?.new_building === "" ?
+              <Box className="asset-box">
+              <Typography fontWeight={700}>
+                อาคาร : {formData?.build || "-"}
+              </Typography>
+
+              <Typography fontWeight={700}>
+                ชั้น : {formData?.floor || "-"}
+              </Typography>
+
+              <Typography fontWeight={700}>
+                ห้อง : {formData?.room || "-"}
+              </Typography>
+            </Box>
+            :<></>
+            }
+            
+
+            <Typography className="label">
               อาคาร
             </Typography>
 

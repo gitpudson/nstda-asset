@@ -240,7 +240,7 @@ const AppContextProvider = (props) => {
 
         if (response) {
             setIsSaving(false);
-            console.log("Success");
+            // console.log("Success");
             await Swal.fire({
                 icon: "success",
                 title: "บันทึกสำเร็จ",
