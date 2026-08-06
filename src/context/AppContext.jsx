@@ -241,11 +241,11 @@ const AppContextProvider = (props) => {
         if (response) {
             setIsSaving(false);
             console.log("Success");
-            Swal.fire({
+            await Swal.fire({
                 icon: "success",
                 title: "บันทึกสำเร็จ",
                 text: "ข้อมูลถูกบันทึกเรียบร้อยแล้ว",
-                timer: 3000,
+                timer: 2000,
                 showConfirmButton: false,
                 timerProgressBar: true
             });
