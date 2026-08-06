@@ -9,11 +9,11 @@ const AppContextProvider = (props) => {
     const url_api_backend = "https://script.google.com/macros/s/AKfycbyg6MlP1rcgNjTaWgob_GZyQS4WiJfE56-nSmhkuk2AgAwUwK8tUeFE1LKIFAfgH5ryzA/exec";
 
 
-    const [dataBuilding,setDataBuilding] = useState([]);
+    const [dataBuilding, setDataBuilding] = useState([]);
     const [menu_building, setMenuBuilding] = useState("");
-    const [isLoading,setIsLoading] = useState(true);
-    const [isSaving,setIsSaving] = useState(false);
-    const [location,setLocation] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+    const [isSaving, setIsSaving] = useState(false);
+    const [location, setLocation] = useState({});
 
 
     const fetAllBuilding = async () => {
@@ -71,53 +71,53 @@ const AppContextProvider = (props) => {
 
     const fetLocation = async (org) => {
 
-    try {
+        try {
 
-        console.log("fetLocation");
+            console.log("fetLocation");
 
-        const post = {
-            function: 'getLocationNew',
-            payload: {
-                org
-            }
-        };
-
-        const response = await axios.post(
-            url_api_backend,
-            post,
-            {
-                headers: {
-                    'Content-Type': 'text/plain'
+            const post = {
+                function: 'getLocationNew',
+                payload: {
+                    org
                 }
+            };
+
+            const response = await axios.post(
+                url_api_backend,
+                post,
+                {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }
+            );
+
+            if (response.data.success) {
+
+                setLocation(response.data.data);
+
+                // console.log(response.data.data);
+
+                // console.log(
+                //     Object.keys(response.data.data)
+                // );
+
             }
-        );
 
-        if (response.data.success) {
+        } catch (error) {
 
-            setLocation(response.data.data);
-
-            // console.log(response.data.data);
-
-            // console.log(
-            //     Object.keys(response.data.data)
-            // );
+            console.error(
+                'Load Location Error:',
+                error
+            );
 
         }
 
-    } catch (error) {
-
-        console.error(
-            'Load Location Error:',
-            error
-        );
-
-    }
-
-};
+    };
 
     const fetAssetByAssetCode1 = async (qrcode) => {
         console.log(qrcode);
-        
+
         const post = {
             function: 'getAssetByAssetCode',
             payload: {
@@ -138,68 +138,68 @@ const AppContextProvider = (props) => {
         if (response.data.success) {
             console.log(response.data.data.org_owner);
             await fetLocation(response.data.data.org_owner);
-            setIsLoading(false);            
+            setIsLoading(false);
             return response.data.data;
-            
-            
+
+
         }
 
     }
 
     const fetAssetByAssetCode = async (qrcode) => {
 
-    try {
+        try {
 
-        console.log(qrcode);
+            console.log(qrcode);
 
-        const post = {
-            // function: 'getAssetByAssetCode',
-            function: 'getAssetByAssetCode_New_Update',
-            payload: {
-                asset_code: qrcode
-            }
-        };
-
-        setIsLoading(true);
-
-        const response = await axios.post(
-            url_api_backend,
-            post,
-            {
-                headers: {
-                    'Content-Type': 'text/plain'
+            const post = {
+                // function: 'getAssetByAssetCode',
+                function: 'getAssetByAssetCode_New_Update',
+                payload: {
+                    asset_code: qrcode
                 }
+            };
+
+            setIsLoading(true);
+
+            const response = await axios.post(
+                url_api_backend,
+                post,
+                {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }
+            );
+
+            if (response.data.success) {
+
+                const assetData = response.data.data;
+
+                // console.log(assetData.org_owner);
+
+                await fetLocation(assetData.org_owner);
+
+                return assetData;
             }
-        );
 
-        if (response.data.success) {
+        } catch (error) {
 
-            const assetData = response.data.data;
+            console.error(
+                'Load Asset Error:',
+                error
+            );
 
-            // console.log(assetData.org_owner);
+        } finally {
 
-            await fetLocation(assetData.org_owner);
+            setIsLoading(false);
 
-            return assetData;
         }
 
-    } catch (error) {
-
-        console.error(
-            'Load Asset Error:',
-            error
-        );
-
-    } finally {
-
-        setIsLoading(false);
-
-    }
-
-};
+    };
 
     const fetStatus = async () => {
-      
+
 
         const post = {
             function: 'getStatus',
@@ -247,7 +247,10 @@ const AppContextProvider = (props) => {
                 text: "ข้อมูลถูกบันทึกเรียบร้อยแล้ว",
                 timer: 2000,
                 showConfirmButton: false,
-                });
+                timerProgressBar: true
+            });
+
+            window.location.reload();
         }
 
     }
