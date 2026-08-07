@@ -690,6 +690,7 @@ export default function AssetRequestMobile({ qrcode }) {
             </Box>
             :<></>
             }
+            
             {/* <Box className="asset-box">
               <Typography fontWeight={700}>
                 อาคาร : {formData?.build || "-"}
