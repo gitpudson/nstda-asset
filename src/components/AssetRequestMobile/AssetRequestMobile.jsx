@@ -665,7 +665,7 @@ export default function AssetRequestMobile({ qrcode }) {
             </Box>
 
             <Typography className="label">
-              ตำแหน่งที่ตั้งเดิมปัจจุบัน
+              ตำแหน่งที่ตั้งปัจจุบัน
             </Typography>
 
             {/* <Box className="asset-box">
@@ -690,7 +690,7 @@ export default function AssetRequestMobile({ qrcode }) {
             </Box>
             :<></>
             }
-            
+
             {/* <Box className="asset-box">
               <Typography fontWeight={700}>
                 อาคาร : {formData?.build || "-"}
